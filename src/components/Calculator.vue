@@ -20,6 +20,11 @@
             <button type="button" id="btn-5">5</button>
             <button type="button" id="btn-6">6</button>
             <button type="button" id="btn-subtract" aria-label="Restar">-</button>
+
+            <button type="button" id="btn-1">1</button>
+            <button type="button" id="btn-2">2</button>
+            <button type="button" id="btn-3">3</button>
+            <button type="button" id="btn-add" aria-label="Sumar">+</button>
         </div>
     </section>
 </template>
