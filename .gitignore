@@ -141,3 +141,27 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+
+# Vite / build
+dist-ssr
+*.local
+*.timestamp-*-*.mjs
+
+# Testing
+__screenshots__/
+test-results/
+playwright-report/
+pnpm-debug.log*
