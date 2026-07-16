@@ -9,6 +9,7 @@
 
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
             <button type="button" id="btn-ce">CE</button>
+            <button type="button" id="btn-divide" aria-label="Dividir">÷</button>
         </div>
     </section>
 </template>
