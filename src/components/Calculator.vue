@@ -25,6 +25,10 @@
             <button type="button" id="btn-2">2</button>
             <button type="button" id="btn-3">3</button>
             <button type="button" id="btn-add" aria-label="Sumar">+</button>
+
+            <button type="button" id="btn-0">0</button>
+            <button type="button" id="btn-decimal" aria-label="Punto decimal">.</button>
+            <button type="button" id="btn-equals" aria-label="Igual">=</button>
         </div>
     </section>
 </template>
