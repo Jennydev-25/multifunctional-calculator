@@ -15,6 +15,11 @@
             <button type="button" id="btn-8">8</button>
             <button type="button" id="btn-9">9</button>
             <button type="button" id="btn-multiply" aria-label="Multiplicar">×</button>
+
+            <button type="button" id="btn-4">4</button>
+            <button type="button" id="btn-5">5</button>
+            <button type="button" id="btn-6">6</button>
+            <button type="button" id="btn-subtract" aria-label="Restar">-</button>
         </div>
     </section>
 </template>
