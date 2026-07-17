@@ -21,6 +21,12 @@
         <select id="municipality-select" name="municipality">
             <option value="33044" selected>Oviedo</option>
         </select>
+
+        <img class="weather__icon" src="" alt="" />
+
+        <p class="weather__temperature"></p>
+        <p class="weather__humidity"></p>
+        <p class="weather__wind"></p>
     </section>
 </template>
 
