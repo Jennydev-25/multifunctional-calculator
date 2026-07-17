@@ -1,4 +1,5 @@
 <script setup>
+import Calculator from '@/components/Calculator.vue'
 </script>
 
 <template>
@@ -8,6 +9,7 @@
   </header>
 
   <main>
+    <Calculator />
   </main>
 
   <footer>
