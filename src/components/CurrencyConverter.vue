@@ -29,6 +29,8 @@
                 </select>
             </div>
         </form>
+
+        <output class="currency-converter__result" aria-live="polite">0</output>
     </section>
 </template>
 
