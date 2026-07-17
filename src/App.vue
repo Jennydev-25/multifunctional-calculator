@@ -4,6 +4,7 @@
 <template>
   <header>
     <h1>Kitly</h1>
+    <p class="app-tagline">Un pequeño kit de herramientas para el día a día.</p>
   </header>
 
   <main>
