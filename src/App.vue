@@ -6,6 +6,7 @@ import CurrencyConverter from '@/components/CurrencyConverter.vue'
 
 <template>
   <header>
+    <img src="@/assets/images/logo.png" alt="Kitly" class="header__logo" />
     <h1>Kitly</h1>
     <p class="app-tagline">Un pequeño kit de herramientas para el día a día.</p>
   </header>
@@ -22,4 +23,10 @@ import CurrencyConverter from '@/components/CurrencyConverter.vue'
   </footer>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+header {
+  h1 {
+    font-family: var(--font-logo);
+  }
+}
+</style>
