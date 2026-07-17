@@ -1,11 +1,17 @@
-<script setup></script>
+<script setup>
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <header>
+    <h1>Kitly</h1>
+  </header>
+
+  <main>
+  </main>
+
+  <footer>
+    <p>© 2026 Kitly</p>
+  </footer>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
