@@ -48,6 +48,13 @@ header {
   padding: 0 var(--sp-sm);
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  padding: var(--sp-sm);
+}
+
 footer {
   color: var(--color-text-on-primary);
   font-family: var(--font-footer);
@@ -67,6 +74,28 @@ footer {
 
   .header__logo {
     width: 56px;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'calculator weather'
+      'currency currency';
+    gap: var(--sp-lg);
+    padding: var(--sp-xl);
+  }
+
+  .calculator {
+    grid-area: calculator;
+  }
+
+  .weather {
+    grid-area: weather;
+  }
+
+  .currency-converter {
+    grid-area: currency;
   }
 
   footer {
