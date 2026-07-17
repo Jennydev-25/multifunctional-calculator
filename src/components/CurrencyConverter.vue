@@ -17,6 +17,17 @@
                     <option value="JPY">Yen (¥)</option>
                 </select>
             </div>
+
+            <button type="button" id="btn-swap-currencies" aria-label="Intercambiar divisas">⇄</button>
+
+            <div class="currency-converter__field">
+                <label for="currency-to">Divisa de destino</label>
+                <select id="currency-to" name="currency-to">
+                    <option value="EUR">Euro (€)</option>
+                    <option value="USD">Dólar ($)</option>
+                    <option value="JPY">Yen (¥)</option>
+                </select>
+            </div>
         </form>
     </section>
 </template>
