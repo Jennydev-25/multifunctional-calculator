@@ -1,5 +1,7 @@
 <script setup>
 import Calculator from '@/components/Calculator.vue'
+import Weather from '@/components/Weather.vue'
+import CurrencyConverter from '@/components/CurrencyConverter.vue'
 </script>
 
 <template>
@@ -10,6 +12,8 @@ import Calculator from '@/components/Calculator.vue'
 
   <main>
     <Calculator />
+    <Weather />
+    <CurrencyConverter />
   </main>
 
   <footer>
