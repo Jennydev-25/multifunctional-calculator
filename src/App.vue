@@ -48,6 +48,14 @@ header {
   padding: 0 var(--sp-sm);
 }
 
+footer {
+  color: var(--color-text-on-primary);
+  font-family: var(--font-footer);
+  text-align: center;
+  padding: var(--sp-md) var(--sp-sm);
+  margin-top: var(--sp-xl);
+}
+
 @media (min-width: 768px) {
   header {
     padding: var(--sp-md) var(--sp-xl);
@@ -59,6 +67,13 @@ header {
 
   .header__logo {
     width: 56px;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    padding: var(--sp-md) var(--sp-xl);
   }
 }
 </style>
