@@ -11,7 +11,8 @@
   </main>
 
   <footer>
-    <p>© 2026 Kitly</p>
+    <p class="footer__copyright">© 2026 Kitly · Todos los derechos reservados</p>
+    <p class="footer__credit">Desarrollado por Jennydev-25</p>
   </footer>
 </template>
 
