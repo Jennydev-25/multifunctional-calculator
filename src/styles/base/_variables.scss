@@ -1,0 +1,65 @@
+:root {
+    --font-logo: 'Aclonica', sans-serif;
+    --font-tagline: 'Gloria Hallelujah', cursive;
+    --font-heading: 'Sofia Sans Extra Condensed', sans-serif;
+    --font-body: 'Sora', sans-serif;
+    --font-footer: 'Manrope', sans-serif;
+
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 2rem;
+
+    --fw-normal: 400;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    --lh-tight: 1.2;
+    --lh-base: 1.6;
+
+    // colores principales
+    --color-primary: #56642b;
+    --color-primary-container: #8a9a5b;
+    --color-secondary: #5a6147;
+    --color-tertiary-container: #ca816a;
+
+    // colores de superficie
+    --color-bg: #fbf9f5;
+    --color-surface: #f5f3ef;
+    --color-surface-high: #efeeea;
+    --color-border: #e5e1d8;
+    --color-border-focus: #8a9a5b;
+
+    // color display de la calculadora
+    --color-display: #d1dbcf;
+
+    // colores de texto
+    --color-text: #1b1c1a;
+    --color-text-muted: #46483c;
+    --color-text-on-primary: #ffffff;
+
+    // colores de estado, control de errores
+    --color-error: #ba1a1a;
+    --color-error-bg: #ffdad6;
+    --color-error-text: #93000a;
+
+    // espaciado
+    --sp-xs: 0.5rem;
+    --sp-sm: 1rem;
+    --sp-md: 1.5rem;
+    --sp-lg: 2rem;
+    --sp-xl: 4rem;
+
+    // bordes redondeados
+    --radius-button: 1rem;
+    --radius-card: 1.25rem;
+    --radius-full: 9999px;
+
+    // sombras
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-interactive: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    // transiciones
+    --transition: 200ms ease;
+}
