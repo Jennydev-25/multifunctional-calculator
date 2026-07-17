@@ -5,21 +5,17 @@
     <section class="weather" aria-labelledby="weather-heading">
         <h2 id="weather-heading">El tiempo</h2>
 
-        <label for="scope-select">Seleccionar</label>
-        <select id="scope-select" name="scope">
-            <option value="nacional">Nacional</option>
-            <option value="provincia">Provincia</option>
-            <option value="municipio" selected>Municipio</option>
-        </select>
-
-        <label for="province-select">Provincia</label>
-        <select id="province-select" name="province">
-            <option value="33" selected>Asturias</option>
-        </select>
-
-        <label for="municipality-select">Municipio</label>
-        <select id="municipality-select" name="municipality">
-            <option value="33044" selected>Oviedo</option>
+        <label for="location-select">Seleccionar</label>
+        <select id="location-select" name="location">
+            <optgroup label="Nacional">
+                <option value="nacional" selected>Resumen nacional</option>
+            </optgroup>
+            <optgroup label="Provincia">
+                <option value="provincia:33">Asturias</option>
+            </optgroup>
+            <optgroup label="Municipio">
+                <option value="municipio:33024">Gijón</option>
+            </optgroup>
         </select>
 
         <img class="weather__icon" src="" alt="" />
