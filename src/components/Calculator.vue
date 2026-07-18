@@ -43,6 +43,22 @@
     }
 }
 
+.calculator__display {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: color-mix(in srgb, var(--color-display) 85%, var(--color-primary) 15%);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-button);
+    padding: var(--sp-sm);
+    margin-bottom: var(--sp-sm);
+    font-family: 'Courier New', monospace;
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-semibold);
+    text-align: right;
+    color: var(--color-text);
+}
+
 @media (min-width: 768px) {
     .calculator {
         padding: var(--sp-lg);
