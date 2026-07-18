@@ -99,11 +99,12 @@ footer {
 
   main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 326px 460px;
     grid-template-areas:
       'calculator weather'
       'currency currency';
-    gap: var(--sp-sm);
+    justify-content: center;
+    gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--sp-md) 24px var(--sp-lg);

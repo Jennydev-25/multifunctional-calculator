@@ -35,12 +35,13 @@
 
 <style lang="scss" scoped>
 .calculator {
+    box-sizing: border-box;
     background-color: var(--color-surface-warm);
     border: 1px solid var(--color-secondary);
     border-radius: 12px;
     box-shadow: var(--shadow-card);
     padding: 16px;
-    max-width: 340px;
+    width: 326px;
 
     h2 {
         font-family: var(--font-heading);
