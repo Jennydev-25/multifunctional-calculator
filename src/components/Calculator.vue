@@ -10,18 +10,22 @@
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
             <button type="button" id="btn-ce">CE</button>
             <button type="button" id="btn-divide" aria-label="Dividir">÷</button>
+
             <button type="button" id="btn-7">7</button>
             <button type="button" id="btn-8">8</button>
             <button type="button" id="btn-9">9</button>
             <button type="button" id="btn-multiply" aria-label="Multiplicar">×</button>
+
             <button type="button" id="btn-4">4</button>
             <button type="button" id="btn-5">5</button>
             <button type="button" id="btn-6">6</button>
             <button type="button" id="btn-subtract" aria-label="Restar">-</button>
+
             <button type="button" id="btn-1">1</button>
             <button type="button" id="btn-2">2</button>
             <button type="button" id="btn-3">3</button>
             <button type="button" id="btn-add" aria-label="Sumar">+</button>
+
             <button type="button" id="btn-0">0</button>
             <button type="button" id="btn-decimal" aria-label="Punto decimal">.</button>
             <button type="button" id="btn-equals" aria-label="Igual">=</button>
@@ -32,14 +36,18 @@
 <style lang="scss" scoped>
 .calculator {
     background-color: var(--color-surface-warm);
-    border-radius: var(--radius-card);
+    border: 1px solid var(--color-secondary);
+    border-radius: 12px;
     box-shadow: var(--shadow-card);
-    padding: var(--sp-sm);
+    padding: 16px;
+    max-width: 340px;
 
     h2 {
         font-family: var(--font-heading);
-        font-size: var(--fs-xl);
-        margin-bottom: var(--sp-sm);
+        font-size: 14px;
+        font-weight: var(--fw-semibold);
+        color: var(--color-text-muted);
+        margin-bottom: 8px;
     }
 }
 
@@ -47,21 +55,132 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
+    min-height: 70px;
     background-color: color-mix(in srgb, var(--color-display) 85%, var(--color-primary) 15%);
     box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
-    border-radius: var(--radius-button);
-    padding: var(--sp-sm);
-    margin-bottom: var(--sp-sm);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
     font-family: 'Courier New', monospace;
-    font-size: var(--fs-2xl);
+    font-size: 24px;
     font-weight: var(--fw-semibold);
     text-align: right;
     color: var(--color-text);
 }
 
-@media (min-width: 768px) {
-    .calculator {
-        padding: var(--sp-lg);
+.calculator__keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        'ce      .        .      divide'
+        'seven   eight    nine   multiply'
+        'four    five     six    subtract'
+        'one     two      three  add'
+        'zero    decimal  equals equals';
+    gap: 6px;
+
+    button {
+        box-sizing: border-box;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-interactive);
+        padding: 8px 0;
+        font-family: var(--font-body);
+        font-size: 18px;
+        font-weight: var(--fw-semibold);
+        color: var(--color-text);
+        cursor: pointer;
+        transition: var(--transition);
+
+        &:hover {
+            filter: brightness(0.97);
+        }
+
+        &:active {
+            transform: scale(0.96);
+            box-shadow: none;
+        }
+    }
+
+    #btn-ce {
+        grid-area: ce;
+        font-size: 14px;
+    }
+
+    #btn-divide {
+        grid-area: divide;
+        background-color: var(--color-primary);
+        color: var(--color-text-on-primary);
+    }
+
+    #btn-7 {
+        grid-area: seven;
+    }
+
+    #btn-8 {
+        grid-area: eight;
+    }
+
+    #btn-9 {
+        grid-area: nine;
+    }
+
+    #btn-multiply {
+        grid-area: multiply;
+        background-color: var(--color-primary);
+        color: var(--color-text-on-primary);
+    }
+
+    #btn-4 {
+        grid-area: four;
+    }
+
+    #btn-5 {
+        grid-area: five;
+    }
+
+    #btn-6 {
+        grid-area: six;
+    }
+
+    #btn-subtract {
+        grid-area: subtract;
+        background-color: var(--color-primary);
+        color: var(--color-text-on-primary);
+    }
+
+    #btn-1 {
+        grid-area: one;
+    }
+
+    #btn-2 {
+        grid-area: two;
+    }
+
+    #btn-3 {
+        grid-area: three;
+    }
+
+    #btn-add {
+        grid-area: add;
+        background-color: var(--color-primary);
+        color: var(--color-text-on-primary);
+    }
+
+    #btn-0 {
+        grid-area: zero;
+    }
+
+    #btn-decimal {
+        grid-area: decimal;
+    }
+
+    #btn-equals {
+        grid-area: equals;
+        background-color: var(--color-tertiary-container);
+        color: var(--color-text-on-primary);
     }
 }
 </style>
