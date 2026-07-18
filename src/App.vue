@@ -10,7 +10,7 @@ import CurrencyConverter from '@/components/CurrencyConverter.vue'
     <h1>Kitly</h1>
   </header>
 
-  <p class="app-tagline">Un pequeño kit de herramientas para el día a día</p>
+  <p class="app-tagline">Un pequeño kit de herramientas para el día a día.</p>
 
   <main>
     <Calculator />
@@ -65,7 +65,7 @@ footer {
 
 @media (min-width: 768px) {
   header {
-    padding: var(--sp-md) var(--sp-xl);
+    padding: var(--sp-sm) var(--sp-xl);
 
     h1 {
       font-size: 2.75rem;
@@ -76,14 +76,20 @@ footer {
     width: 56px;
   }
 
+  .app-tagline {
+    margin-bottom: var(--sp-sm);
+  }
+
   main {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 7fr 5fr;
     grid-template-areas:
       'calculator weather'
       'currency currency';
-    gap: var(--sp-lg);
-    padding: var(--sp-xl);
+    gap: var(--sp-sm);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px var(--sp-lg);
   }
 
   .calculator {
