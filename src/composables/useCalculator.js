@@ -23,6 +23,10 @@ export function useCalculator() {
     }
 
     function inputOperator(nextOperator) {
+        if (waitingForOperand.value) {
+            operator.value = nextOperator;
+            return;
+        }
         if (previousValue.value !== null && operator.value !== null) {
             calculate();
         }
