@@ -6,8 +6,10 @@ export function useCalculator() {
     const previousValue = ref(null);
     const operator = ref(null);
     const waitingForOperand = ref(false);
+    const hasInput = ref(false);
 
     function inputDigit(digit) {
+        hasInput.value = true;
         if (waitingForOperand.value) {
             display.value = digit;
             waitingForOperand.value = false;
@@ -23,6 +25,9 @@ export function useCalculator() {
     }
 
     function inputOperator(nextOperator) {
+        if (!hasInput.value) {
+            return;
+        }
         if (waitingForOperand.value) {
             operator.value = nextOperator;
             return;
@@ -50,6 +55,7 @@ export function useCalculator() {
         previousValue.value = null;
         operator.value = null;
         waitingForOperand.value = false;
+        hasInput.value = false;
     }
 
     return { display, previousValue, operator, inputDigit, inputDecimal, inputOperator, calculate, clear };
