@@ -207,4 +207,14 @@ describe('useCalculator', () => {
         calculate();
         expect(history.value).toBe('5 + 3');
     });
+
+    test('deberia limpiar el operador y el valor anterior despues de calcular', () => {
+        const { operator, previousValue, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        inputDigit('3');
+        calculate();
+        expect(operator.value).toBe(null);
+        expect(previousValue.value).toBe(null);
+    });
 });
