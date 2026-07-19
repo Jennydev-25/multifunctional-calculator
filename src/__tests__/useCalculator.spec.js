@@ -51,4 +51,13 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('8');
     });
+
+    test('deberia calcular una resta al pulsar igual', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('9');
+        inputOperator('-');
+        inputDigit('4');
+        calculate();
+        expect(display.value).toBe('5');
+    });
 });
