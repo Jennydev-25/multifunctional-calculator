@@ -83,7 +83,7 @@ export function useCalculator() {
     function squareRoot() {
         const value = Number(display.value);
         const result = Math.sqrt(value);
-        display.value = String(result);
+        display.value = Number.isFinite(result) ? String(result) : 'Error';
     }
 
     return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot };
