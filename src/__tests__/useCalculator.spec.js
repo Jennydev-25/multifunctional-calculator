@@ -190,4 +190,12 @@ describe('useCalculator', () => {
         inputOperator('+');
         expect(expression.value).toBe('5 +');
     });
+
+    test('deberia actualizar la expresion mientras se escribe el segundo numero', () => {
+        const { expression, inputDigit, inputOperator } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        inputDigit('3');
+        expect(expression.value).toBe('5 + 3');
+    });
 });
