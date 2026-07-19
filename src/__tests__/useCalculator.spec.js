@@ -42,4 +42,13 @@ describe('useCalculator', () => {
         expect(previousValue.value).toBe('5');
         expect(operator.value).toBe('+');
     });
+
+    test('deberia calcular una suma al pulsar igual', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        inputDigit('3');
+        calculate();
+        expect(display.value).toBe('8');
+    });
 });
