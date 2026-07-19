@@ -42,7 +42,7 @@ export function useCalculator() {
         const a = Number(previousValue.value);
         const b = Number(display.value);
         const result = operate(a, b, operator.value);
-        display.value = String(result);
+        display.value = Number.isFinite(result) ? String(result) : 'Error';
     }
 
     function clear() {
