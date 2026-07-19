@@ -261,4 +261,10 @@ describe('useCalculator', () => {
         toggleSign();
         expect(display.value).toBe('-5');
     });
+
+    test('no deberia mostrar signo negativo al cambiar el signo de 0', () => {
+        const { display, toggleSign } = useCalculator();
+        toggleSign();
+        expect(display.value).toBe('0');
+    });
 });
