@@ -34,4 +34,12 @@ describe('useCalculator', () => {
         inputDecimal();
         expect(display.value).toBe('5.');
     });
+
+    test('deberia guardar el valor anterior y el operador al pulsar un operador', () => {
+        const { previousValue, operator, inputDigit, inputOperator } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        expect(previousValue.value).toBe('5');
+        expect(operator.value).toBe('+');
+    });
 });
