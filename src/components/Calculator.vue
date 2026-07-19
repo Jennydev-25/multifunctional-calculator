@@ -1,14 +1,17 @@
 <script setup>
 import { useCalculator } from '@/composables/useCalculator.js'
 
-const { display, inputDigit, inputDecimal, inputOperator, calculate, clear } = useCalculator()
+const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear } = useCalculator()
 </script>
 
 <template>
     <section class="calculator" aria-labelledby="calculator-heading">
         <h2 id="calculator-heading">Calculadora</h2>
 
-        <output class="calculator__display" aria-live="polite">{{ display }}</output>
+        <div class="calculator__display">
+            <p class="calculator__expression">{{ expression || history }}</p>
+            <output class="calculator__result" aria-live="polite">{{ display }}</output>
+        </div>
 
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
             <button type="button" id="btn-ce" @click="clear">CE</button>
@@ -55,19 +58,32 @@ const { display, inputDigit, inputDecimal, inputOperator, calculate, clear } = u
 }
 
 .calculator__display {
-    display: block;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     min-height: 70px;
     background-color: color-mix(in srgb, var(--color-display) 85%, var(--color-primary) 15%);
     box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    padding: 12px;
+    padding: 8px 12px;
     margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.calculator__expression {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+    min-height: 18px;
+}
+
+.calculator__result {
     font-family: 'Courier New', monospace;
     font-size: 24px;
     font-weight: var(--fw-semibold);
-    text-align: right;
     color: var(--color-text);
 }
 
