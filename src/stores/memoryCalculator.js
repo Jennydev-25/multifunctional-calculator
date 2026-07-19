@@ -16,5 +16,9 @@ export const useMemoryCalculatorStore = defineStore('memoryCalculator', () => {
         memoryValue.value = memoryValue.value - value;
     }
 
-    return { memoryValue, memoryStore, memoryAdd, memorySubtract };
+    function memoryClear() {
+        memoryValue.value = 0;
+    }
+
+    return { memoryValue, memoryStore, memoryAdd, memorySubtract, memoryClear };
 });
