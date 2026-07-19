@@ -17,4 +17,11 @@ describe('useMemoryCalculatorStore', () => {
         store.memoryStore(25);
         expect(store.memoryValue).toBe(25);
     });
+
+    test('deberia sumar un valor a la memoria con M+', () => {
+        const store = useMemoryCalculatorStore();
+        store.memoryStore(10);
+        store.memoryAdd(5);
+        expect(store.memoryValue).toBe(15);
+    });
 });
