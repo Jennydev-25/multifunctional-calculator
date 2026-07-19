@@ -26,6 +26,7 @@ export function useCalculator() {
         if (waitingForOperand.value) {
             display.value = digit;
             waitingForOperand.value = false;
+            history.value = '';
             return;
         }
         if (display.value.length >= MAX_DISPLAY_LENGTH) {
