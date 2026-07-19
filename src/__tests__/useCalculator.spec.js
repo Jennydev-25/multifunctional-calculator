@@ -217,4 +217,14 @@ describe('useCalculator', () => {
         expect(operator.value).toBe(null);
         expect(previousValue.value).toBe(null);
     });
+
+    test('deberia empezar un numero nuevo si se pulsa un digito justo despues de calcular', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('7');
+        inputOperator('+');
+        inputDigit('3');
+        calculate();
+        inputDigit('5');
+        expect(display.value).toBe('5');
+    });
 });
