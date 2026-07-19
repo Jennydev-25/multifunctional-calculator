@@ -69,4 +69,13 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('42');
     });
+
+    test('deberia calcular una division al pulsar igual', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('8');
+        inputOperator('/');
+        inputDigit('2');
+        calculate();
+        expect(display.value).toBe('4');
+    });
 });
