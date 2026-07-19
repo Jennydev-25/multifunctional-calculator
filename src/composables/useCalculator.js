@@ -7,5 +7,9 @@ export function useCalculator() {
         display.value = display.value === '0' ? digit : display.value + digit;
     }
 
-    return { display, inputDigit };
+    function inputDecimal() {
+        display.value = display.value + '.';
+    }
+
+    return { display, inputDigit, inputDecimal };
 }
