@@ -1,34 +1,41 @@
 <script setup>
+import { useCalculator } from '@/composables/useCalculator.js'
+
+const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign } = useCalculator()
 </script>
 
 <template>
     <section class="calculator" aria-labelledby="calculator-heading">
         <h2 id="calculator-heading">Calculadora</h2>
 
-        <output class="calculator__display" aria-live="polite">0</output>
+        <div class="calculator__display">
+            <p class="calculator__expression">{{ expression || history }}</p>
+            <output class="calculator__result" aria-live="polite">{{ display }}</output>
+        </div>
 
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
-            <button type="button" id="btn-ce">CE</button>
-            <button type="button" id="btn-divide" aria-label="Dividir">÷</button>
+            <button type="button" id="btn-ce" @click="clear">CE</button>
+            <button type="button" id="btn-sqrt" aria-label="Raiz cuadrada" @click="squareRoot">√</button>
+            <button type="button" id="btn-sign" aria-label="Cambiar signo" @click="toggleSign">+/-</button>
+            <button type="button" id="btn-divide" aria-label="Dividir" @click="inputOperator('/')">÷</button>
 
-            <button type="button" id="btn-7">7</button>
-            <button type="button" id="btn-8">8</button>
-            <button type="button" id="btn-9">9</button>
-            <button type="button" id="btn-multiply" aria-label="Multiplicar">×</button>
+            <button type="button" id="btn-7" @click="inputDigit('7')">7</button>
+            <button type="button" id="btn-8" @click="inputDigit('8')">8</button>
+            <button type="button" id="btn-9" @click="inputDigit('9')">9</button>
+            <button type="button" id="btn-multiply" aria-label="Multiplicar" @click="inputOperator('*')">×</button>
 
-            <button type="button" id="btn-4">4</button>
-            <button type="button" id="btn-5">5</button>
-            <button type="button" id="btn-6">6</button>
-            <button type="button" id="btn-subtract" aria-label="Restar">-</button>
+            <button type="button" id="btn-4" @click="inputDigit('4')">4</button>
+            <button type="button" id="btn-5" @click="inputDigit('5')">5</button>
+            <button type="button" id="btn-6" @click="inputDigit('6')">6</button>
+            <button type="button" id="btn-subtract" aria-label="Restar" @click="inputOperator('-')">-</button>
 
-            <button type="button" id="btn-1">1</button>
-            <button type="button" id="btn-2">2</button>
-            <button type="button" id="btn-3">3</button>
-            <button type="button" id="btn-add" aria-label="Sumar">+</button>
-
-            <button type="button" id="btn-0">0</button>
-            <button type="button" id="btn-decimal" aria-label="Punto decimal">.</button>
-            <button type="button" id="btn-equals" aria-label="Igual">=</button>
+            <button type="button" id="btn-1" @click="inputDigit('1')">1</button>
+            <button type="button" id="btn-2" @click="inputDigit('2')">2</button>
+            <button type="button" id="btn-3" @click="inputDigit('3')">3</button>
+            <button type="button" id="btn-add" aria-label="Sumar" @click="inputOperator('+')">+</button>
+            <button type="button" id="btn-0" @click="inputDigit('0')">0</button>
+            <button type="button" id="btn-decimal" aria-label="Punto decimal" @click="inputDecimal">.</button>
+            <button type="button" id="btn-equals" aria-label="Igual" @click="calculate">=</button>
         </div>
     </section>
 </template>
@@ -53,19 +60,32 @@
 }
 
 .calculator__display {
-    display: block;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     min-height: 70px;
     background-color: color-mix(in srgb, var(--color-display) 85%, var(--color-primary) 15%);
     box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    padding: 12px;
+    padding: 8px 12px;
     margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.calculator__expression {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+    min-height: 18px;
+}
+
+.calculator__result {
     font-family: 'Courier New', monospace;
     font-size: 24px;
     font-weight: var(--fw-semibold);
-    text-align: right;
     color: var(--color-text);
 }
 
@@ -73,7 +93,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
-        'ce      .        .      divide'
+        'ce      sqrt     sign   divide'
         'seven   eight    nine   multiply'
         'four    five     six    subtract'
         'one     two      three  add'
@@ -107,6 +127,15 @@
 
     #btn-ce {
         grid-area: ce;
+        font-size: 14px;
+    }
+
+    #btn-sqrt {
+        grid-area: sqrt;
+    }
+
+    #btn-sign {
+        grid-area: sign;
         font-size: 14px;
     }
 
