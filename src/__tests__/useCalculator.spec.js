@@ -19,4 +19,11 @@ describe('useCalculator', () => {
         inputDigit('2');
         expect(display.value).toBe('12');
     });
+
+    test('deberia añadir un punto decimal al display', () => {
+        const { display, inputDigit, inputDecimal } = useCalculator();
+        inputDigit('5');
+        inputDecimal();
+        expect(display.value).toBe('5.');
+    });
 });
