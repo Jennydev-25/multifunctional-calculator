@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { operate } from '../utils/operate.js';
 
 const MAX_DISPLAY_LENGTH = 12;
@@ -9,6 +9,13 @@ export function useCalculator() {
     const operator = ref(null);
     const waitingForOperand = ref(false);
     const hasInput = ref(false);
+
+    const expression = computed(() => {
+        if (previousValue.value === null || operator.value === null) {
+            return '';
+        }
+        return previousValue.value + ' ' + operator.value;
+    });
 
     function inputDigit(digit) {
         hasInput.value = true;
@@ -63,5 +70,5 @@ export function useCalculator() {
         hasInput.value = false;
     }
 
-    return { display, previousValue, operator, inputDigit, inputDecimal, inputOperator, calculate, clear };
+    return { display, previousValue, operator, expression, inputDigit, inputDecimal, inputOperator, calculate, clear };
 }
