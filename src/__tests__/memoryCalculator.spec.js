@@ -31,4 +31,11 @@ describe('useMemoryCalculatorStore', () => {
         store.memorySubtract(3);
         expect(store.memoryValue).toBe(7);
     });
+
+    test('deberia limpiar la memoria con MC', () => {
+        const store = useMemoryCalculatorStore();
+        store.memoryStore(50);
+        store.memoryClear();
+        expect(store.memoryValue).toBe(0);
+    });
 });
