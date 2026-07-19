@@ -1,7 +1,28 @@
 <script setup>
 import { useCalculator } from '@/composables/useCalculator.js'
+import { useMemoryCalculatorStore } from '@/stores/memoryCalculator.js'
 
-const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign } = useCalculator()
+const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign, startNewEntry } = useCalculator()
+const memory = useMemoryCalculatorStore()
+
+function handleMemoryStore() {
+    memory.memoryStore(Number(display.value))
+    startNewEntry()
+}
+
+function handleMemoryAdd() {
+    memory.memoryAdd(Number(display.value))
+    startNewEntry()
+}
+
+function handleMemorySubtract() {
+    memory.memorySubtract(Number(display.value))
+    startNewEntry()
+}
+
+function handleMemoryRecall() {
+    inputDigit(String(memory.memoryValue))
+}
 </script>
 
 <template>
@@ -11,6 +32,14 @@ const { display, expression, history, inputDigit, inputDecimal, inputOperator, c
         <div class="calculator__display">
             <p class="calculator__expression">{{ expression || history }}</p>
             <output class="calculator__result" aria-live="polite">{{ display }}</output>
+        </div>
+
+        <div class="calculator__memory" role="group" aria-label="Memoria de la calculadora">
+            <button type="button" id="btn-mc" @click="memory.memoryClear">MC</button>
+            <button type="button" id="btn-mr" @click="handleMemoryRecall">MR</button>
+            <button type="button" id="btn-mplus" @click="handleMemoryAdd">M+</button>
+            <button type="button" id="btn-mminus" @click="handleMemorySubtract">M-</button>
+            <button type="button" id="btn-ms" @click="handleMemoryStore">MS</button>
         </div>
 
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
@@ -87,6 +116,36 @@ const { display, expression, history, inputDigit, inputDecimal, inputOperator, c
     font-size: 24px;
     font-weight: var(--fw-semibold);
     color: var(--color-text);
+}
+
+.calculator__memory {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 6px;
+
+    button {
+        box-sizing: border-box;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        background-color: var(--color-primary-container);
+        color: var(--color-text-on-primary);
+        padding: 6px 0;
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: var(--fw-semibold);
+        cursor: pointer;
+        transition: var(--transition);
+
+        &:hover {
+            filter: brightness(0.97);
+        }
+
+        &:active {
+            transform: scale(0.96);
+        }
+    }
 }
 
 .calculator__keys {
