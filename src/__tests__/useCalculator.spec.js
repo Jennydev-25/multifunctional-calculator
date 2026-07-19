@@ -227,4 +227,14 @@ describe('useCalculator', () => {
         inputDigit('5');
         expect(display.value).toBe('5');
     });
+
+    test('deberia limpiar el historial al empezar un numero nuevo despues de calcular', () => {
+        const { history, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('7');
+        inputOperator('+');
+        inputDigit('3');
+        calculate();
+        inputDigit('5');
+        expect(history.value).toBe('');
+    });
 });
