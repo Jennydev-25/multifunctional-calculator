@@ -1,12 +1,19 @@
 import { ref } from 'vue';
+import { operate } from '../utils/operate.js';
 
 export function useCalculator() {
     const display = ref('0');
     const previousValue = ref(null);
     const operator = ref(null);
+    const waitingForOperand = ref(false);
 
     function inputDigit(digit) {
-        display.value = display.value === '0' ? digit : display.value + digit;
+        if (waitingForOperand.value) {
+            display.value = digit;
+            waitingForOperand.value = false;
+        } else {
+            display.value = display.value === '0' ? digit : display.value + digit;
+        }
     }
 
     function inputDecimal() {
@@ -18,7 +25,15 @@ export function useCalculator() {
     function inputOperator(nextOperator) {
         previousValue.value = display.value;
         operator.value = nextOperator;
+        waitingForOperand.value = true;
     }
 
-    return { display, previousValue, operator, inputDigit, inputDecimal, inputOperator };
+    function calculate() {
+        const a = Number(previousValue.value);
+        const b = Number(display.value);
+        const result = operate(a, b, operator.value);
+        display.value = String(result);
+    }
+
+    return { display, previousValue, operator, inputDigit, inputDecimal, inputOperator, calculate };
 }
