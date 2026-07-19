@@ -144,15 +144,17 @@ describe('useCalculator', () => {
 
     test('deberia mostrar Error si el resultado es Infinity', () => {
         const { display, inputDigit, inputOperator, calculate } = useCalculator();
-        const bigNumber = '9'.repeat(200);
-        for (const digit of bigNumber) {
+        const maxNumber = '9'.repeat(12);
+        for (const digit of maxNumber) {
             inputDigit(digit);
         }
-        inputOperator('*');
-        for (const digit of bigNumber) {
-            inputDigit(digit);
+        for (let i = 0; i < 30; i++) {
+            inputOperator('*');
+            for (const digit of maxNumber) {
+                inputDigit(digit);
+            }
+            calculate();
         }
-        calculate();
         expect(display.value).toBe('Error');
     });
 

@@ -1,6 +1,8 @@
 import { ref } from 'vue';
 import { operate } from '../utils/operate.js';
 
+const MAX_DISPLAY_LENGTH = 12;
+
 export function useCalculator() {
     const display = ref('0');
     const previousValue = ref(null);
@@ -13,6 +15,9 @@ export function useCalculator() {
         if (waitingForOperand.value) {
             display.value = digit;
             waitingForOperand.value = false;
+            return;
+        }
+        if (display.value.length >= MAX_DISPLAY_LENGTH) {
             return;
         }
         display.value = display.value === '0' ? digit : display.value + digit;
