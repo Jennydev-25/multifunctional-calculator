@@ -91,5 +91,9 @@ export function useCalculator() {
         display.value = String(value);
     }
 
-    return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign };
+    function startNewEntry() {
+        waitingForOperand.value = true;
+    }
+
+    return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign, startNewEntry };
 }
