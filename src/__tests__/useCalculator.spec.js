@@ -237,4 +237,11 @@ describe('useCalculator', () => {
         inputDigit('5');
         expect(history.value).toBe('');
     });
+
+    test('deberia calcular la raiz cuadrada de un numero', () => {
+        const { display, inputDigit, squareRoot } = useCalculator();
+        inputDigit('9');
+        squareRoot();
+        expect(display.value).toBe('3');
+    });
 });
