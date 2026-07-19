@@ -36,6 +36,9 @@ export function useCalculator() {
     }
 
     function calculate() {
+        if (waitingForOperand.value) {
+            return;
+        }
         const a = Number(previousValue.value);
         const b = Number(display.value);
         const result = operate(a, b, operator.value);
