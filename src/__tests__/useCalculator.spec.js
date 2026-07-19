@@ -78,4 +78,13 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('4');
     });
+
+    test('deberia mostrar Error al dividir entre cero', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('5');
+        inputOperator('/');
+        inputDigit('0');
+        calculate();
+        expect(display.value).toBe('Error');
+    });
 });
