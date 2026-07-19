@@ -155,4 +155,16 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('Error');
     });
+
+    test('deberia mostrar Error si el resultado es NaN', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('5');
+        inputOperator('/');
+        inputDigit('0');
+        calculate();
+        inputOperator('+');
+        inputDigit('3');
+        calculate();
+        expect(display.value).toBe('Error');
+    });
 });
