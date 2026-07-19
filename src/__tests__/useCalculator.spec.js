@@ -98,4 +98,15 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('6');
     });
+
+    test('deberia resetear la calculadora al pulsar CE', () => {
+        const { display, previousValue, operator, inputDigit, inputOperator, clear } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        inputDigit('3');
+        clear();
+        expect(display.value).toBe('0');
+        expect(previousValue.value).toBe(null);
+        expect(operator.value).toBe(null);
+    });
 });
