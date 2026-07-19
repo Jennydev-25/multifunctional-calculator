@@ -5,18 +5,8 @@ import { useMemoryCalculatorStore } from '@/stores/memoryCalculator.js'
 const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign, startNewEntry } = useCalculator()
 const memory = useMemoryCalculatorStore()
 
-function handleMemoryStore() {
-    memory.memoryStore(Number(display.value))
-    startNewEntry()
-}
-
-function handleMemoryAdd() {
-    memory.memoryAdd(Number(display.value))
-    startNewEntry()
-}
-
-function handleMemorySubtract() {
-    memory.memorySubtract(Number(display.value))
+function runMemoryAction(action) {
+    action(Number(display.value))
     startNewEntry()
 }
 
@@ -37,9 +27,9 @@ function handleMemoryRecall() {
         <div class="calculator__memory" role="group" aria-label="Memoria de la calculadora">
             <button type="button" id="btn-mc" @click="memory.memoryClear">MC</button>
             <button type="button" id="btn-mr" @click="handleMemoryRecall">MR</button>
-            <button type="button" id="btn-mplus" @click="handleMemoryAdd">M+</button>
-            <button type="button" id="btn-mminus" @click="handleMemorySubtract">M-</button>
-            <button type="button" id="btn-ms" @click="handleMemoryStore">MS</button>
+            <button type="button" id="btn-mplus" @click="runMemoryAction(memory.memoryAdd)">M+</button>
+            <button type="button" id="btn-mminus" @click="runMemoryAction(memory.memorySubtract)">M-</button>
+            <button type="button" id="btn-ms" @click="runMemoryAction(memory.memoryStore)">MS</button>
         </div>
 
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
