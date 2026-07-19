@@ -1,5 +1,6 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
+import { operate } from '../utils/operate.js';
 
 export const useMemoryCalculatorStore = defineStore('memoryCalculator', () => {
     const memoryValue = ref(0);
@@ -9,11 +10,11 @@ export const useMemoryCalculatorStore = defineStore('memoryCalculator', () => {
     }
 
     function memoryAdd(value) {
-        memoryValue.value = memoryValue.value + value;
+        memoryValue.value = operate(memoryValue.value, value, '+');
     }
 
     function memorySubtract(value) {
-        memoryValue.value = memoryValue.value - value;
+        memoryValue.value = operate(memoryValue.value, value, '-');
     }
 
     function memoryClear() {
