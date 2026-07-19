@@ -183,4 +183,11 @@ describe('useCalculator', () => {
         }
         expect(display.value.length).toBe(12);
     });
+
+    test('deberia mostrar la expresion en curso', () => {
+        const { expression, inputDigit, inputOperator } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        expect(expression.value).toBe('5 +');
+    });
 });
