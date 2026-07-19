@@ -126,4 +126,11 @@ describe('useCalculator', () => {
         expect(previousValue.value).toBe('5');
         expect(operator.value).toBe('-');
     });
+
+    test('no deberia cambiar el display si se pulsa igual sin operacion pendiente', () => {
+        const { display, inputDigit, calculate } = useCalculator();
+        inputDigit('7');
+        calculate();
+        expect(display.value).toBe('7');
+    });
 });
