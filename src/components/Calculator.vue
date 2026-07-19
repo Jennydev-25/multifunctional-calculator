@@ -1,7 +1,7 @@
 <script setup>
 import { useCalculator } from '@/composables/useCalculator.js'
 
-const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear } = useCalculator()
+const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign } = useCalculator()
 </script>
 
 <template>
@@ -15,6 +15,8 @@ const { display, expression, history, inputDigit, inputDecimal, inputOperator, c
 
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
             <button type="button" id="btn-ce" @click="clear">CE</button>
+            <button type="button" id="btn-sqrt" aria-label="Raiz cuadrada" @click="squareRoot">√</button>
+            <button type="button" id="btn-sign" aria-label="Cambiar signo" @click="toggleSign">+/-</button>
             <button type="button" id="btn-divide" aria-label="Dividir" @click="inputOperator('/')">÷</button>
 
             <button type="button" id="btn-7" @click="inputDigit('7')">7</button>
@@ -91,7 +93,7 @@ const { display, expression, history, inputDigit, inputDecimal, inputOperator, c
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
-        'ce      .        .      divide'
+        'ce      sqrt     sign   divide'
         'seven   eight    nine   multiply'
         'four    five     six    subtract'
         'one     two      three  add'
@@ -125,6 +127,15 @@ const { display, expression, history, inputDigit, inputDecimal, inputOperator, c
 
     #btn-ce {
         grid-area: ce;
+        font-size: 14px;
+    }
+
+    #btn-sqrt {
+        grid-area: sqrt;
+    }
+
+    #btn-sign {
+        grid-area: sign;
         font-size: 14px;
     }
 
