@@ -117,4 +117,13 @@ describe('useCalculator', () => {
         inputDigit('5');
         expect(display.value).toBe('5');
     });
+
+    test('deberia reemplazar el operador sin alterar el valor si se pulsan dos seguidos', () => {
+        const { previousValue, operator, inputDigit, inputOperator } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        inputOperator('-');
+        expect(previousValue.value).toBe('5');
+        expect(operator.value).toBe('-');
+    });
 });
