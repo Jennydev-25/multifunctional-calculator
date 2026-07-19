@@ -44,7 +44,7 @@ export function useCalculator() {
         if (!hasInput.value) {
             return;
         }
-        if (waitingForOperand.value) {
+        if (waitingForOperand.value && previousValue.value !== null) {
             operator.value = nextOperator;
             return;
         }
@@ -67,6 +67,7 @@ export function useCalculator() {
         display.value = Number.isFinite(result) ? String(result) : 'Error';
         previousValue.value = null;
         operator.value = null;
+        waitingForOperand.value = true;
     }
 
     function clear() {
