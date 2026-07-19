@@ -254,4 +254,11 @@ describe('useCalculator', () => {
         squareRoot();
         expect(display.value).toBe('Error');
     });
+
+    test('deberia cambiar el signo de un numero positivo a negativo', () => {
+        const { display, inputDigit, toggleSign } = useCalculator();
+        inputDigit('5');
+        toggleSign();
+        expect(display.value).toBe('-5');
+    });
 });
