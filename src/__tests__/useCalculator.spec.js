@@ -133,4 +133,12 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('7');
     });
+
+    test('no deberia calcular si se pulsa igual justo despues de un operador', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        calculate();
+        expect(display.value).toBe('5');
+    });
 });
