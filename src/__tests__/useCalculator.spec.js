@@ -141,4 +141,18 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('5');
     });
+
+    test('deberia mostrar Error si el resultado es Infinity', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        const bigNumber = '9'.repeat(200);
+        for (const digit of bigNumber) {
+            inputDigit(digit);
+        }
+        inputOperator('*');
+        for (const digit of bigNumber) {
+            inputDigit(digit);
+        }
+        calculate();
+        expect(display.value).toBe('Error');
+    });
 });
