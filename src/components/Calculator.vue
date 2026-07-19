@@ -1,34 +1,36 @@
 <script setup>
+import { useCalculator } from '@/composables/useCalculator.js'
+
+const { display, inputDigit, inputDecimal, inputOperator, calculate, clear } = useCalculator()
 </script>
 
 <template>
     <section class="calculator" aria-labelledby="calculator-heading">
         <h2 id="calculator-heading">Calculadora</h2>
 
-        <output class="calculator__display" aria-live="polite">0</output>
+        <output class="calculator__display" aria-live="polite">{{ display }}</output>
 
         <div class="calculator__keys" role="group" aria-label="Teclado de la calculadora">
-            <button type="button" id="btn-ce">CE</button>
-            <button type="button" id="btn-divide" aria-label="Dividir">÷</button>
+            <button type="button" id="btn-ce" @click="clear">CE</button>
+            <button type="button" id="btn-divide" aria-label="Dividir" @click="inputOperator('/')">÷</button>
 
-            <button type="button" id="btn-7">7</button>
-            <button type="button" id="btn-8">8</button>
-            <button type="button" id="btn-9">9</button>
-            <button type="button" id="btn-multiply" aria-label="Multiplicar">×</button>
+            <button type="button" id="btn-7" @click="inputDigit('7')">7</button>
+            <button type="button" id="btn-8" @click="inputDigit('8')">8</button>
+            <button type="button" id="btn-9" @click="inputDigit('9')">9</button>
+            <button type="button" id="btn-multiply" aria-label="Multiplicar" @click="inputOperator('*')">×</button>
 
-            <button type="button" id="btn-4">4</button>
-            <button type="button" id="btn-5">5</button>
-            <button type="button" id="btn-6">6</button>
-            <button type="button" id="btn-subtract" aria-label="Restar">-</button>
+            <button type="button" id="btn-4" @click="inputDigit('4')">4</button>
+            <button type="button" id="btn-5" @click="inputDigit('5')">5</button>
+            <button type="button" id="btn-6" @click="inputDigit('6')">6</button>
+            <button type="button" id="btn-subtract" aria-label="Restar" @click="inputOperator('-')">-</button>
 
-            <button type="button" id="btn-1">1</button>
-            <button type="button" id="btn-2">2</button>
-            <button type="button" id="btn-3">3</button>
-            <button type="button" id="btn-add" aria-label="Sumar">+</button>
-
-            <button type="button" id="btn-0">0</button>
-            <button type="button" id="btn-decimal" aria-label="Punto decimal">.</button>
-            <button type="button" id="btn-equals" aria-label="Igual">=</button>
+            <button type="button" id="btn-1" @click="inputDigit('1')">1</button>
+            <button type="button" id="btn-2" @click="inputDigit('2')">2</button>
+            <button type="button" id="btn-3" @click="inputDigit('3')">3</button>
+            <button type="button" id="btn-add" aria-label="Sumar" @click="inputOperator('+')">+</button>
+            <button type="button" id="btn-0" @click="inputDigit('0')">0</button>
+            <button type="button" id="btn-decimal" aria-label="Punto decimal" @click="inputDecimal">.</button>
+            <button type="button" id="btn-equals" aria-label="Igual" @click="calculate">=</button>
         </div>
     </section>
 </template>
