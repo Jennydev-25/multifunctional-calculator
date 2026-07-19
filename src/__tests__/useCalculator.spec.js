@@ -26,4 +26,12 @@ describe('useCalculator', () => {
         inputDecimal();
         expect(display.value).toBe('5.');
     });
+
+    test('no deberia añadir un segundo punto decimal', () => {
+        const { display, inputDigit, inputDecimal } = useCalculator();
+        inputDigit('5');
+        inputDecimal();
+        inputDecimal();
+        expect(display.value).toBe('5.');
+    });
 });
