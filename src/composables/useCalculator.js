@@ -11,9 +11,9 @@ export function useCalculator() {
         if (waitingForOperand.value) {
             display.value = digit;
             waitingForOperand.value = false;
-        } else {
-            display.value = display.value === '0' ? digit : display.value + digit;
+            return;
         }
+        display.value = display.value === '0' ? digit : display.value + digit;
     }
 
     function inputDecimal() {
