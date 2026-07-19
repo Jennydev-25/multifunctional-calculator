@@ -14,7 +14,10 @@ export function useCalculator() {
         if (previousValue.value === null || operator.value === null) {
             return '';
         }
-        return previousValue.value + ' ' + operator.value;
+        if (waitingForOperand.value) {
+            return previousValue.value + ' ' + operator.value;
+        }
+        return previousValue.value + ' ' + operator.value + ' ' + display.value;
     });
 
     function inputDigit(digit) {
