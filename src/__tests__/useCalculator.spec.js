@@ -267,4 +267,12 @@ describe('useCalculator', () => {
         toggleSign();
         expect(display.value).toBe('0');
     });
+
+    test('deberia empezar un numero nuevo tras llamar a startNewEntry', () => {
+        const { display, inputDigit, startNewEntry } = useCalculator();
+        inputDigit('1');
+        startNewEntry();
+        inputDigit('5');
+        expect(display.value).toBe('5');
+    });
 });
