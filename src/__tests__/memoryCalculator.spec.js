@@ -11,4 +11,10 @@ describe('useMemoryCalculatorStore', () => {
         const store = useMemoryCalculatorStore();
         expect(store.memoryValue).toBe(0);
     });
+
+    test('deberia guardar un valor en la memoria con MS', () => {
+        const store = useMemoryCalculatorStore();
+        store.memoryStore(25);
+        expect(store.memoryValue).toBe(25);
+    });
 });
