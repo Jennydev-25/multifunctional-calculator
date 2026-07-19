@@ -60,4 +60,13 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('5');
     });
+
+    test('deberia calcular una multiplicacion al pulsar igual', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('6');
+        inputOperator('*');
+        inputDigit('7');
+        calculate();
+        expect(display.value).toBe('42');
+    });
 });
