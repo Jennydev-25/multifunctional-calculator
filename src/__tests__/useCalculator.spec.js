@@ -244,4 +244,14 @@ describe('useCalculator', () => {
         squareRoot();
         expect(display.value).toBe('3');
     });
+
+    test('deberia mostrar Error al calcular la raiz cuadrada de un numero negativo', () => {
+        const { display, inputDigit, inputOperator, calculate, squareRoot } = useCalculator();
+        inputDigit('0');
+        inputOperator('-');
+        inputDigit('4');
+        calculate();
+        squareRoot();
+        expect(display.value).toBe('Error');
+    });
 });
