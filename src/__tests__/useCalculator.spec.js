@@ -167,4 +167,10 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('Error');
     });
+
+    test('deberia ignorar un operador si se pulsa antes de introducir un digito', () => {
+        const { operator, inputOperator } = useCalculator();
+        inputOperator('+');
+        expect(operator.value).toBe(null);
+    });
 });
