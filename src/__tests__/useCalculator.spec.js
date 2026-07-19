@@ -173,4 +173,12 @@ describe('useCalculator', () => {
         inputOperator('+');
         expect(operator.value).toBe(null);
     });
+
+    test('no deberia superar los 12 caracteres en el display', () => {
+        const { display, inputDigit } = useCalculator();
+        for (let i = 0; i < 15; i++) {
+            inputDigit('9');
+        }
+        expect(display.value.length).toBe(12);
+    });
 });
