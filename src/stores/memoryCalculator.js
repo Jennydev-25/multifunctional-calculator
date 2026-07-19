@@ -8,5 +8,9 @@ export const useMemoryCalculatorStore = defineStore('memoryCalculator', () => {
         memoryValue.value = value;
     }
 
-    return { memoryValue, memoryStore };
+    function memoryAdd(value) {
+        memoryValue.value = memoryValue.value + value;
+    }
+
+    return { memoryValue, memoryStore, memoryAdd };
 });
