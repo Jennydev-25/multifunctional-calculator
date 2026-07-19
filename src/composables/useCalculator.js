@@ -80,5 +80,11 @@ export function useCalculator() {
         history.value = '';
     }
 
-    return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear };
+    function squareRoot() {
+        const value = Number(display.value);
+        const result = Math.sqrt(value);
+        display.value = String(result);
+    }
+
+    return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot };
 }
