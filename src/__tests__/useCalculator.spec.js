@@ -87,4 +87,15 @@ describe('useCalculator', () => {
         calculate();
         expect(display.value).toBe('Error');
     });
+
+    test('deberia encadenar operaciones sin pulsar igual', () => {
+        const { display, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        inputDigit('3');
+        inputOperator('-');
+        inputDigit('2');
+        calculate();
+        expect(display.value).toBe('6');
+    });
 });
