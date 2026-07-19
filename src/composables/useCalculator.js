@@ -38,5 +38,12 @@ export function useCalculator() {
         display.value = String(result);
     }
 
-    return { display, previousValue, operator, inputDigit, inputDecimal, inputOperator, calculate };
+    function clear() {
+        display.value = '0';
+        previousValue.value = null;
+        operator.value = null;
+        waitingForOperand.value = false;
+    }
+
+    return { display, previousValue, operator, inputDigit, inputDecimal, inputOperator, calculate, clear };
 }
