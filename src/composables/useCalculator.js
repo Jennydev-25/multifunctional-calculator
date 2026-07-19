@@ -23,6 +23,9 @@ export function useCalculator() {
     }
 
     function inputOperator(nextOperator) {
+        if (previousValue.value !== null && operator.value !== null) {
+            calculate();
+        }
         previousValue.value = display.value;
         operator.value = nextOperator;
         waitingForOperand.value = true;
