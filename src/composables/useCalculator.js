@@ -9,6 +9,7 @@ export function useCalculator() {
     const operator = ref(null);
     const waitingForOperand = ref(false);
     const hasInput = ref(false);
+    const history = ref('');
 
     const expression = computed(() => {
         if (previousValue.value === null || operator.value === null) {
@@ -59,6 +60,7 @@ export function useCalculator() {
         if (waitingForOperand.value) {
             return;
         }
+        history.value = expression.value;
         const a = Number(previousValue.value);
         const b = Number(display.value);
         const result = operate(a, b, operator.value);
@@ -71,7 +73,8 @@ export function useCalculator() {
         operator.value = null;
         waitingForOperand.value = false;
         hasInput.value = false;
+        history.value = '';
     }
 
-    return { display, previousValue, operator, expression, inputDigit, inputDecimal, inputOperator, calculate, clear };
+    return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear };
 }
