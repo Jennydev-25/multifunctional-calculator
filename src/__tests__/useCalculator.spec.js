@@ -109,4 +109,12 @@ describe('useCalculator', () => {
         expect(previousValue.value).toBe(null);
         expect(operator.value).toBe(null);
     });
+
+    test('no deberia mostrar ceros a la izquierda', () => {
+        const { display, inputDigit } = useCalculator();
+        inputDigit('0');
+        inputDigit('0');
+        inputDigit('5');
+        expect(display.value).toBe('5');
+    });
 });
