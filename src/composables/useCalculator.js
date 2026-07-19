@@ -8,7 +8,9 @@ export function useCalculator() {
     }
 
     function inputDecimal() {
-        display.value = display.value + '.';
+        if (!display.value.includes('.')) {
+            display.value = display.value + '.';
+        }
     }
 
     return { display, inputDigit, inputDecimal };
