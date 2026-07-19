@@ -65,6 +65,8 @@ export function useCalculator() {
         const b = Number(display.value);
         const result = operate(a, b, operator.value);
         display.value = Number.isFinite(result) ? String(result) : 'Error';
+        previousValue.value = null;
+        operator.value = null;
     }
 
     function clear() {
