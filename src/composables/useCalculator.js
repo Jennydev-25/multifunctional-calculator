@@ -86,5 +86,10 @@ export function useCalculator() {
         display.value = Number.isFinite(result) ? String(result) : 'Error';
     }
 
-    return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot };
+    function toggleSign() {
+        const value = Number(display.value) * -1;
+        display.value = String(value);
+    }
+
+    return { display, previousValue, operator, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign };
 }
