@@ -12,4 +12,11 @@ describe('useCalculator', () => {
         inputDigit('5');
         expect(display.value).toBe('5');
     });
+
+    test('deberia concatenar digitos si el display ya tiene un numero', () => {
+        const { display, inputDigit } = useCalculator();
+        inputDigit('1');
+        inputDigit('2');
+        expect(display.value).toBe('12');
+    });
 });
