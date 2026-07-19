@@ -198,4 +198,13 @@ describe('useCalculator', () => {
         inputDigit('3');
         expect(expression.value).toBe('5 + 3');
     });
+
+    test('deberia guardar la expresion en el historial al calcular', () => {
+        const { history, inputDigit, inputOperator, calculate } = useCalculator();
+        inputDigit('5');
+        inputOperator('+');
+        inputDigit('3');
+        calculate();
+        expect(history.value).toBe('5 + 3');
+    });
 });
