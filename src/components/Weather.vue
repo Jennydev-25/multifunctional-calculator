@@ -1,8 +1,9 @@
 <script setup>
 import { useWeather } from '@/composables/useWeather.js'
+import { skyIdToImage } from '@/utils/skyIdToImage.js'
 
 const {
-    location, skyDescription, temperature, humidity, wind, forecast,
+    location, skyDescription, skyId, temperature, humidity, wind, forecast,
     isLoading, errorMessage, nationalCities, provinces, municipalities,
     changeLocation, changeProvinceForMunicipalities,
 } = useWeather()
@@ -15,8 +16,7 @@ function handleLocationChange() {
 <template>
     <section class="weather" aria-labelledby="weather-heading">
         <div class="weather__hero">
-            <img class="weather__icon" src="" alt="" />
-            <div class="weather__hero-overlay"></div>
+            <img class="weather__icon" :src="skyIdToImage(skyId)" alt="" />
 
             <div class="weather__location">
                 <label for="location-select" class="sr-only">Ubicación</label>
@@ -91,8 +91,7 @@ function handleLocationChange() {
 
 .weather__hero {
     position: relative;
-    height: 160px;
-    background: linear-gradient(to bottom, var(--color-primary-container), var(--color-surface));
+    height: 200px;
 }
 
 .weather__icon {
@@ -101,12 +100,6 @@ function handleLocationChange() {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.weather__hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, var(--color-surface) 5%, transparent 60%);
 }
 
 .weather__location {
@@ -134,6 +127,9 @@ function handleLocationChange() {
 .weather__sky-icon {
     font-size: 28px;
     color: var(--color-primary);
+    background-color: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    border-radius: var(--radius-full);
+    padding: 4px;
 }
 
 .weather__temperature {
@@ -147,6 +143,7 @@ function handleLocationChange() {
     color: var(--color-primary);
     line-height: 1;
     margin: 0;
+    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.8);
 
     span {
         font-size: 24px;
