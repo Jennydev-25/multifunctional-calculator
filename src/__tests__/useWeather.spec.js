@@ -73,4 +73,23 @@ describe('useWeather', () => {
 
         expect(errorMessage.value).toBe('No se pudieron cargar los municipios');
     });
+
+    test('deberia usar valores por defecto si la API devuelve campos vacios', async () => {
+        vi.spyOn(WeatherService.prototype, 'getWeather').mockResolvedValue({
+            getSkyDescription: () => null,
+            getSkyId: () => '14',
+            getTemperature: () => null,
+            getHumidity: () => null,
+            getWind: () => null,
+            getForecast: () => [],
+        });
+
+        const { skyDescription, temperature, humidity, wind, fetchWeather } = useWeather();
+        await fetchWeather();
+
+        expect(skyDescription.value).toBe('Información no disponible');
+        expect(temperature.value).toBe('--');
+        expect(humidity.value).toBe('--');
+        expect(wind.value).toBe('--');
+    });
 });
