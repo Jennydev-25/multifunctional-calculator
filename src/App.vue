@@ -1,7 +1,6 @@
 <script setup>
 import Calculator from '@/components/Calculator.vue'
 import Weather from '@/components/Weather.vue'
-import CurrencyConverter from '@/components/CurrencyConverter.vue'
 </script>
 
 <template>
@@ -18,7 +17,6 @@ import CurrencyConverter from '@/components/CurrencyConverter.vue'
 
   <main>
     <Calculator />
-    <CurrencyConverter />
     <Weather />
   </main>
 
@@ -99,10 +97,8 @@ footer {
 
   main {
     display: grid;
-    grid-template-columns: 326px 460px;
-    grid-template-areas:
-      'calculator weather'
-      'currency currency';
+    grid-template-columns: 471px 665px;
+    grid-template-areas: 'calculator weather';
     justify-content: center;
     gap: 20px;
     max-width: 1200px;
@@ -116,10 +112,6 @@ footer {
 
   .weather {
     grid-area: weather;
-  }
-
-  .currency-converter {
-    grid-area: currency;
   }
 
   footer {
