@@ -70,7 +70,8 @@ function handleMemoryRecall() {
     border-radius: 12px;
     box-shadow: var(--shadow-card);
     padding: 16px;
-    width: 471px;
+    width: 100%;
+    max-width: 471px;
 
     h2 {
         font-family: var(--font-heading);
