@@ -43,4 +43,8 @@ describe('weatherMapper', () => {
         expect(result[0]).toEqual({ date: '2026-07-18', max: '27', min: '16', skyId: '45' });
         expect(result[1].skyId).toBe('13');
     });
+
+    test('deberia devolver un array vacio si no hay proximos_dias', () => {
+        expect(weatherMapper.forecast({})).toEqual([]);
+    });
 });
