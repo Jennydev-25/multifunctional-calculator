@@ -16,4 +16,9 @@ describe('weatherMapper', () => {
         const data = { temperatura_actual: '27' };
         expect(weatherMapper.temperature(data)).toBe('27');
     });
+
+    test('deberia extraer la humedad', () => {
+        const data = { humedad: '49' };
+        expect(weatherMapper.humidity(data)).toBe('49');
+    });
 });
