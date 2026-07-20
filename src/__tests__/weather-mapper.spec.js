@@ -6,4 +6,9 @@ describe('weatherMapper', () => {
         const data = { stateSky: { description: 'Nuboso' } };
         expect(weatherMapper.skyDescription(data)).toBe('Nuboso');
     });
+
+    test('deberia extraer el id del cielo', () => {
+        const data = { stateSky: { id: '14' } };
+        expect(weatherMapper.skyId(data)).toBe('14');
+    });
 });
