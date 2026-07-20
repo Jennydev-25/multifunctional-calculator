@@ -7,6 +7,7 @@
 ## 📑 Índice
 
 - [Despliegue](#-despliegue)
+- [Vista de la aplicación](#-vista-de-la-aplicación)
 - [Descripción](#-descripción)
 - [Análisis](#-análisis)
 - [Instalación](#-instalación)
@@ -29,6 +30,14 @@
 Despliegue automatizado mediante **GitHub Actions**: cada push a `main` ejecuta el build de producción con Vite, inyecta las variables de entorno (API keys y URLs base) como Secrets del repositorio, y publica el resultado en GitHub Pages.
 
 > **App desplegada:** [Kitly](https://jennydev-25.github.io/multifunctional-calculator/)
+
+---
+
+## 📱 Vista de la aplicación
+
+|                                  Escritorio                                  |                                 Móvil                                  |
+| :--------------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| ![Kitly en escritorio](src/assets/images/screenshots/app/desktop-result.png) | ![Kitly en móvil](src/assets/images/screenshots/app/mobile-result.png) |
 
 ---
 
@@ -722,14 +731,22 @@ Diseñado en Figma Board antes del desarrollo para mapear las rutas principal y 
 ```text
 multifunctional-calculator/
 ├── index.html
-├── main.js
+├── jsconfig.json
 ├── package.json
 ├── vite.config.js
+├── vitest.config.js
 ├── playwright.config.js
 ├── .env.example
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── public/
+│   ├── favicon.ico
+│   └── favicons/
 ├── e2e/
 │   └── vue.spec.js
 └── src/
+    ├── main.js
     ├── App.vue
     ├── components/
     │   ├── Calculator.vue
@@ -766,12 +783,19 @@ multifunctional-calculator/
     ├── assets/
     │   └── images/
     │       ├── logo.png
-    │       └── sky/
-    │           ├── sunny.png
-    │           ├── cloudy.png
-    │           ├── overcast.png
-    │           └── rain.png
+    │       ├── sky/
+    │       │   ├── sunny.png
+    │       │   ├── cloudy.png
+    │       │   ├── overcast.png
+    │       │   └── rain.png
+    │       └── screenshots/
+    │           ├── app/
+    │           ├── jira/
+    │           ├── prototype/
+    │           ├── tests/
+    │           └── userflow/
     ├── styles/
+    │   ├── main.scss
     │   └── base/
     │       ├── _variables.scss
     │       ├── _typography.scss
