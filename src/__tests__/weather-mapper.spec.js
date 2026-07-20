@@ -21,4 +21,9 @@ describe('weatherMapper', () => {
         const data = { humedad: '49' };
         expect(weatherMapper.humidity(data)).toBe('49');
     });
+
+    test('deberia extraer el viento', () => {
+        const data = { viento: '21' };
+        expect(weatherMapper.wind(data)).toBe('21');
+    });
 });
