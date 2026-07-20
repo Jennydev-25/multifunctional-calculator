@@ -63,4 +63,15 @@ describe('CurrencyConverter', () => {
         await wrapper.find('form').trigger('submit');
         expect(wrapper.exists()).toBe(true);
     });
+
+    test('deberia mostrar un mensaje de error si falla la API', async () => {
+        vi.spyOn(CurrencyService.prototype, 'getRate').mockRejectedValue(new Error('fail'));
+        const wrapper = mount(CurrencyConverter);
+        const input = wrapper.find('#amount-from');
+        await input.setValue('1000');
+        await input.trigger('input');
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        expect(wrapper.find('.currency-converter__result-label').text()).toContain('No se pudo obtener');
+    });
 });
