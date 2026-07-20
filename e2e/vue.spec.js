@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test'
 
-test('deberia realizar una suma completa en la calculadora', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto('/')
+})
 
+test('deberia realizar una suma completa en la calculadora', async ({ page }) => {
   await page.locator('#btn-5').click()
   await page.locator('#btn-add').click()
   await page.locator('#btn-3').click()
@@ -12,8 +14,6 @@ test('deberia realizar una suma completa en la calculadora', async ({ page }) =>
 })
 
 test('deberia mostrar Error al dividir entre cero', async ({ page }) => {
-  await page.goto('/')
-
   await page.locator('#btn-5').click()
   await page.locator('#btn-divide').click()
   await page.locator('#btn-0').click()
@@ -23,8 +23,6 @@ test('deberia mostrar Error al dividir entre cero', async ({ page }) => {
 })
 
 test('deberia convertir una cantidad entre divisas', async ({ page }) => {
-  await page.goto('/')
-
   await page.locator('#amount-from').fill('100')
   await page.locator('#amount-from').dispatchEvent('input')
 
