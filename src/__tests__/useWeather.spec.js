@@ -54,4 +54,23 @@ describe('useWeather', () => {
 
         expect(errorMessage.value).toBe('Ubicación no valida');
     });
+
+    test('deberia mostrar error si falla la carga de ubicaciones', async () => {
+        vi.spyOn(LocationsService.prototype, 'getNationalCities').mockRejectedValue(new Error('fail'));
+
+        const { errorMessage, loadLocations } = useWeather();
+        await loadLocations();
+
+        expect(errorMessage.value).toBe('No se pudieron cargar las ubicaciones');
+    });
+
+    test('deberia mostrar error si falla la carga de municipios', async () => {
+        vi.spyOn(LocationsService.prototype, 'getMunicipalities').mockRejectedValue(new Error('fail'));
+
+        const { errorMessage, changeProvinceForMunicipalities } = useWeather();
+        changeProvinceForMunicipalities('33');
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        expect(errorMessage.value).toBe('No se pudieron cargar los municipios');
+    });
 });
