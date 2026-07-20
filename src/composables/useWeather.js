@@ -89,6 +89,6 @@ export function useWeather() {
     return {
         location, skyDescription, skyId, temperature, humidity, wind, forecast,
         isLoading, errorMessage, nationalCities, provinces, municipalities,
-        isLoadingLocations, fetchWeather, changeLocation, changeProvinceForMunicipalities,
+        isLoadingLocations, fetchWeather, loadLocations, changeLocation, changeProvinceForMunicipalities,
     };
 }

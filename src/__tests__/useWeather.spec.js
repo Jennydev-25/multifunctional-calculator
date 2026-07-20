@@ -23,4 +23,35 @@ describe('useWeather', () => {
         expect(temperature.value).toBe('27');
         expect(skyDescription.value).toBe('Nuboso');
     });
+
+    test('deberia cargar las ubicaciones nacionales provincias y municipios', async () => {
+        vi.spyOn(LocationsService.prototype, 'getNationalCities').mockResolvedValue([{ name: 'Oviedo' }]);
+        vi.spyOn(LocationsService.prototype, 'getProvinces').mockResolvedValue([{ name: 'Asturias' }]);
+        vi.spyOn(LocationsService.prototype, 'getMunicipalities').mockResolvedValue([{ name: 'Gijón' }]);
+
+        const { nationalCities, provinces, municipalities, loadLocations } = useWeather();
+        await loadLocations();
+
+        expect(nationalCities.value).toEqual([{ name: 'Oviedo' }]);
+        expect(provinces.value).toEqual([{ name: 'Asturias' }]);
+        expect(municipalities.value).toEqual([{ name: 'Gijón' }]);
+    });
+
+    test('deberia cargar los municipios de otra provincia', async () => {
+        vi.spyOn(LocationsService.prototype, 'getMunicipalities').mockResolvedValue([{ name: 'Avilés' }]);
+
+        const { municipalities, changeProvinceForMunicipalities } = useWeather();
+        changeProvinceForMunicipalities('33');
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        expect(municipalities.value).toEqual([{ name: 'Avilés' }]);
+    });
+
+    test('deberia mostrar error si la ubicacion no tiene codigos validos', async () => {
+        const { errorMessage, changeLocation } = useWeather();
+        changeLocation('invalido');
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        expect(errorMessage.value).toBe('Ubicación no valida');
+    });
 });
