@@ -63,3 +63,14 @@
     // transiciones
     --transition: 200ms ease;
 }
+
+// modo oscuro
+.dark-mode {
+    --color-bg: #14150f;
+    --color-surface: #24261c;
+    --color-surface-high: #2b2d1f;
+    --color-surface-warm: #33351f;
+    --color-display: #3a4530;
+    --color-text: #eef0e2;
+    --color-text-muted: #b8bca8;
+}
