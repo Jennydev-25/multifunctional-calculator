@@ -1,6 +1,7 @@
 <script setup>
 import { useCalculator } from '@/composables/useCalculator.js'
 import { useMemoryCalculatorStore } from '@/stores/memoryCalculator.js'
+import CurrencyConverter from './CurrencyConverter.vue'
 
 const { display, expression, history, inputDigit, inputDecimal, inputOperator, calculate, clear, squareRoot, toggleSign, startNewEntry } = useCalculator()
 const memory = useMemoryCalculatorStore()
@@ -56,6 +57,8 @@ function handleMemoryRecall() {
             <button type="button" id="btn-decimal" aria-label="Punto decimal" @click="inputDecimal">.</button>
             <button type="button" id="btn-equals" aria-label="Igual" @click="calculate">=</button>
         </div>
+
+        <CurrencyConverter />
     </section>
 </template>
 
@@ -67,7 +70,7 @@ function handleMemoryRecall() {
     border-radius: 12px;
     box-shadow: var(--shadow-card);
     padding: 16px;
-    width: 326px;
+    width: 471px;
 
     h2 {
         font-family: var(--font-heading);
