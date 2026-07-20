@@ -26,7 +26,7 @@
 
 ## 🌐 Despliegue
 
-La aplicación está desplegada en **GitHub Pages**, directamente desde la rama `main` del repositorio.
+Despliegue automatizado mediante **GitHub Actions**: cada push a `main` ejecuta el build de producción con Vite, inyecta las variables de entorno (API keys y URLs base) como Secrets del repositorio, y publica el resultado en GitHub Pages.
 
 > **App desplegada:** [Kitly](https://jennydev-25.github.io/multifunctional-calculator/)
 
@@ -175,7 +175,7 @@ El diseño se realizó con **Google Stitch**, y los wireframes de baja fidelidad
 
 ## 🗺️ Userflow
 
-Diseñado en Figma Board antes del desarrollo para mapear las rutas principal y alternativas de la aplicación, y validar que los tres módulos encajaban de forma natural en una sola vista, sin necesidad de Vue Router. |
+Diseñado en Figma Board antes del desarrollo para mapear las rutas principal y alternativas de la aplicación, y validar que los tres módulos encajaban de forma natural en una sola vista, sin necesidad de Vue Router.
 
 🔗 [Ver userflow en Figma](https://www.figma.com/board/7Z2nkzO16ojbN9pPYA7EvZ/Kitly---Userflow?t=oO8MOqjWKkMbeoxH-0)
 
