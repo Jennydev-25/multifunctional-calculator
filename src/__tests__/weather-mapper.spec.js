@@ -11,4 +11,9 @@ describe('weatherMapper', () => {
         const data = { stateSky: { id: '14' } };
         expect(weatherMapper.skyId(data)).toBe('14');
     });
+
+    test('deberia extraer la temperatura', () => {
+        const data = { temperatura_actual: '27' };
+        expect(weatherMapper.temperature(data)).toBe('27');
+    });
 });
