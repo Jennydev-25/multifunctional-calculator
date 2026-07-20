@@ -1,6 +1,23 @@
 <script setup>
+import { ref, onMounted, watch } from 'vue'
 import Calculator from '@/components/Calculator.vue'
 import Weather from '@/components/Weather.vue'
+
+const isDarkMode = ref(false)
+
+function toggleDarkMode() {
+  isDarkMode.value = !isDarkMode.value
+}
+
+watch(isDarkMode, (value) => {
+  document.documentElement.classList.toggle('dark-mode', value)
+  localStorage.setItem('kitly-theme', value ? 'dark' : 'light')
+})
+
+onMounted(() => {
+  const saved = localStorage.getItem('kitly-theme')
+  isDarkMode.value = saved === 'dark'
+})
 </script>
 
 <template>
@@ -12,7 +29,12 @@ import Weather from '@/components/Weather.vue'
 
     <p class="app-tagline">Un pequeño kit de herramientas para el día a día.</p>
 
-    <div class="header__actions"></div>
+    <div class="header__actions">
+      <button type="button" id="btn-theme-toggle" @click="toggleDarkMode"
+        :aria-label="isDarkMode ? 'Activar modo claro' : 'Activar modo oscuro'">
+        <span class="material-symbols-outlined">{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</span>
+      </button>
+    </div>
   </header>
 
   <main>
@@ -61,6 +83,24 @@ header {
 
 .header__actions {
   justify-self: end;
+}
+
+#btn-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    filter: brightness(0.97);
+  }
 }
 
 main {
