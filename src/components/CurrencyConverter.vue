@@ -1,40 +1,47 @@
 <script setup>
+import { useCurrencyConverter } from '@/composables/useCurrencyConverter.js'
+
+const { amount, currencyFrom, currencyTo, result, rateLabel, isLoading, errorMessage, convert, swapCurrencies } = useCurrencyConverter()
 </script>
 
 <template>
     <section class="currency-converter" aria-labelledby="currency-converter-heading">
         <h2 id="currency-converter-heading">Conversor de divisas</h2>
 
-        <form class="currency-converter__body">
+        <form class="currency-converter__body" @submit.prevent="convert">
             <div class="currency-converter__amount">
                 <label for="amount-from">Cantidad</label>
-                <input type="number" id="amount-from" name="amount-from" min="0" value="1000" />
+                <input type="number" id="amount-from" name="amount-from" min="0" v-model="amount" @input="convert" />
             </div>
 
             <div class="currency-converter__pair">
                 <span class="currency-converter__pair-label">Convertir a</span>
 
                 <label for="currency-from" class="sr-only">Divisa de origen</label>
-                <select id="currency-from" name="currency-from">
-                    <option value="USD" selected>USD · Dólar</option>
+                <select id="currency-from" name="currency-from" v-model="currencyFrom" @change="convert">
+                    <option value="USD">USD · Dólar</option>
                     <option value="EUR">EUR · Euro</option>
                     <option value="JPY">JPY · Yen</option>
                 </select>
 
-                <button type="button" id="btn-swap-currencies" aria-label="Intercambiar divisas">⇄</button>
+                <button type="button" id="btn-swap-currencies" aria-label="Intercambiar divisas"
+                    @click="swapCurrencies">⇄</button>
 
                 <label for="currency-to" class="sr-only">Convertir a</label>
-                <select id="currency-to" name="currency-to">
-                    <option value="EUR" selected>EUR · Euro</option>
+                <select id="currency-to" name="currency-to" v-model="currencyTo" @change="convert">
+                    <option value="EUR">EUR · Euro</option>
                     <option value="USD">USD · Dólar</option>
                     <option value="JPY">JPY · Yen</option>
                 </select>
             </div>
 
             <output class="currency-converter__result" aria-live="polite">
-                <span class="currency-converter__result-label">Resultado estimado</span>
-                <span class="currency-converter__result-value">924.50 <span>EUR</span></span>
-                <span class="currency-converter__result-rate">1 USD = 0.9245 EUR</span>
+                <span class="currency-converter__result-label">
+                    {{ isLoading ? 'Calculando...' : (errorMessage || 'Resultado estimado') }}
+                </span>
+                <span class="currency-converter__result-value">{{ result ?? '0.00' }} <span>{{ currencyTo
+                        }}</span></span>
+                <span class="currency-converter__result-rate" v-if="rateLabel">{{ rateLabel }}</span>
             </output>
         </form>
     </section>
