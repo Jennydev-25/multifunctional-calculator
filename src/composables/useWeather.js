@@ -1,15 +1,11 @@
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import WeatherRepository from '@/core/apis/weather/WeatherRepository';
 import WeatherService from '@/core/apis/weather/WeatherService';
-
-const LOCATIONS = {
-    'nacional:33044': { codProv: '33', codMunicipio: '33044' },
-    'provincia:33': { codProv: '33', codMunicipio: '33044' },
-    'municipio:33024': { codProv: '33', codMunicipio: '33024' },
-}
+import LocationsRepository from '@/core/apis/weather/LocationsRepository';
+import LocationsService from '@/core/apis/weather/LocationsService';
 
 export function useWeather() {
-    const location = ref('municipio:33024');
+    const location = ref('municipio:33:33024');
     const skyDescription = ref('');
     const skyId = ref('');
     const temperature = ref('');
@@ -19,9 +15,39 @@ export function useWeather() {
     const isLoading = ref(false);
     const errorMessage = ref('');
 
+    const nationalCities = ref([]);
+    const provinces = ref([]);
+    const municipalities = ref([]);
+    const isLoadingLocations = ref(false);
+
+    async function loadLocations() {
+        isLoadingLocations.value = true;
+        try {
+            const locationsRepo = new LocationsRepository();
+            const locationsService = new LocationsService(locationsRepo);
+            nationalCities.value = await locationsService.getNationalCities();
+            provinces.value = await locationsService.getProvinces();
+            municipalities.value = await locationsService.getMunicipalities('33');
+        } catch (error) {
+            errorMessage.value = 'No se pudieron cargar las ubicaciones';
+        } finally {
+            isLoadingLocations.value = false;
+        }
+    }
+
+    async function loadMunicipalities(codProv) {
+        try {
+            const locationsRepo = new LocationsRepository();
+            const locationsService = new LocationsService(locationsRepo);
+            municipalities.value = await locationsService.getMunicipalities(codProv);
+        } catch (error) {
+            errorMessage.value = 'No se pudieron cargar los municipios';
+        }
+    }
+
     async function fetchWeather() {
-        const selected = LOCATIONS[location.value];
-        if (!selected) {
+        const [, codProv, codMunicipio] = location.value.split(':');
+        if (!codProv || !codMunicipio) {
             errorMessage.value = 'Ubicación no valida';
             return;
         }
@@ -29,7 +55,7 @@ export function useWeather() {
         isLoading.value = true;
         errorMessage.value = '';
         try {
-            const repository = new WeatherRepository(selected.codProv, selected.codMunicipio);
+            const repository = new WeatherRepository(codProv, codMunicipio);
             const service = new WeatherService(repository);
             const weather = await service.getWeather();
 
@@ -51,5 +77,18 @@ export function useWeather() {
         fetchWeather();
     }
 
-    return { location, skyDescription, skyId, temperature, humidity, wind, forecast, isLoading, errorMessage, fetchWeather, changeLocation };
+    function changeProvinceForMunicipalities(codProv) {
+        loadMunicipalities(codProv);
+    }
+
+    onMounted(() => {
+        loadLocations();
+        fetchWeather();
+    });
+
+    return {
+        location, skyDescription, skyId, temperature, humidity, wind, forecast,
+        isLoading, errorMessage, nationalCities, provinces, municipalities,
+        isLoadingLocations, changeLocation, changeProvinceForMunicipalities,
+    };
 }
