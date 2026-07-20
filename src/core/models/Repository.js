@@ -10,9 +10,9 @@ export default class Repository {
         return this.uri
     }
 
-    async getAxios() {
+    async getAxios(uri) {
         try {
-            const response = await axios.get(this.uri)
+            const response = await axios.get(uri ?? this.uri)
             return response.data
         } catch (error) {
             throw new Error("Algo pasó")

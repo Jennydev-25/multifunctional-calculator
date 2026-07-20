@@ -1,97 +1,69 @@
 <script setup>
+import { useWeather } from '@/composables/useWeather.js'
+
+const {
+    location, skyDescription, temperature, humidity, wind, forecast,
+    isLoading, errorMessage, nationalCities, provinces, municipalities,
+    changeLocation, changeProvinceForMunicipalities,
+} = useWeather()
+
+function handleLocationChange() {
+    changeLocation(location.value)
+}
 </script>
 
 <template>
     <section class="weather" aria-labelledby="weather-heading">
-        <img class="weather__icon" src="" alt="" />
+        <div class="weather__hero">
+            <img class="weather__icon" src="" alt="" />
+            <div class="weather__hero-overlay"></div>
+
+            <div class="weather__location">
+                <label for="location-select" class="sr-only">Ubicación</label>
+                <select id="location-select" name="location" v-model="location" @change="handleLocationChange">
+                    <optgroup label="Nacional">
+                        <option v-for="city in nationalCities" :key="city.codMunicipio"
+                            :value="`nacional:${city.codProv}:${city.codMunicipio}`">
+                            {{ city.name }}
+                        </option>
+                    </optgroup>
+                    <optgroup label="Provincia">
+                        <option v-for="province in provinces" :key="province.codProv"
+                            :value="`provincia:${province.codProv}:33044`">
+                            {{ province.name }}
+                        </option>
+                    </optgroup>
+                    <optgroup label="Municipio">
+                        <option v-for="municipio in municipalities" :key="municipio.codMunicipio"
+                            :value="`municipio:${municipio.codProv}:${municipio.codMunicipio}`">
+                            {{ municipio.name }}
+                        </option>
+                    </optgroup>
+                </select>
+                <span class="material-symbols-outlined weather__sky-icon" aria-hidden="true">cloud</span>
+            </div>
+
+            <p class="weather__temperature" v-if="!isLoading">{{ temperature }}<span>°</span></p>
+            <p class="weather__temperature" v-else>...</p>
+        </div>
 
         <div class="weather__content">
-
-            <div class="weather__header">
-                <h2 id="weather-heading">El tiempo</h2>
-
-                <div class="weather__selector">
-                    <label for="location-select" class="sr-only">Ubicación</label>
-                    <select id="location-select" name="location">
-                        <option value="" selected disabled>Ubicación</option>
-
-                        <optgroup label="Nacional">
-                            <option value="nacional:33044">Oviedo</option>
-                        </optgroup>
-
-                        <optgroup label="Provincia">
-                            <option value="provincia:33">Asturias</option>
-                        </optgroup>
-
-                        <optgroup label="Municipio">
-                            <option value="municipio:33024">Gijón</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-
-            <div class="weather__current">
-                <p class="weather__temperature">27°</p>
-
-                <span class="material-symbols-outlined weather__sky-icon" aria-hidden="true">
-                    cloud
-                </span>
-            </div>
-
-            <p class="weather__sky">Nuboso</p>
+            <h2 id="weather-heading" class="sr-only">El tiempo</h2>
+            <p class="weather__sky">{{ errorMessage || skyDescription }}</p>
 
             <dl class="weather__stats">
                 <dt>Humedad</dt>
-                <dd>49%</dd>
-
+                <dd>{{ humidity }}%</dd>
                 <dt>Viento</dt>
-                <dd>21 km/h</dd>
+                <dd>{{ wind }} km/h</dd>
             </dl>
 
             <ul class="weather__forecast">
-                <li>
-                    <span class="weather__forecast-day">Lun</span>
-                    <span class="material-symbols-outlined weather__forecast-icon">sunny</span>
-                    <span class="weather__forecast-temp">29°</span>
-                </li>
-
-                <li>
-                    <span class="weather__forecast-day">Mar</span>
-                    <span class="material-symbols-outlined weather__forecast-icon">partly_cloudy_day</span>
-                    <span class="weather__forecast-temp">28°</span>
-                </li>
-
-                <li>
-                    <span class="weather__forecast-day">Mié</span>
-                    <span class="material-symbols-outlined weather__forecast-icon">rainy</span>
-                    <span class="weather__forecast-temp">30°</span>
-                </li>
-
-                <li>
-                    <span class="weather__forecast-day">Jue</span>
-                    <span class="material-symbols-outlined weather__forecast-icon">cloud</span>
-                    <span class="weather__forecast-temp">30°</span>
-                </li>
-
-                <li>
-                    <span class="weather__forecast-day">Vie</span>
-                    <span class="material-symbols-outlined weather__forecast-icon">sunny</span>
-                    <span class="weather__forecast-temp">27°</span>
-                </li>
-
-                <li>
-                    <span class="weather__forecast-day">Sáb</span>
-                    <span class="material-symbols-outlined weather__forecast-icon">sunny</span>
-                    <span class="weather__forecast-temp">27°</span>
-                </li>
-
-                <li>
-                    <span class="weather__forecast-day">Dom</span>
-                    <span class="material-symbols-outlined weather__forecast-icon">partly_cloudy_day</span>
-                    <span class="weather__forecast-temp">30°</span>
+                <li v-for="day in forecast" :key="day.date">
+                    <span class="weather__forecast-day">{{ day.date }}</span>
+                    <span class="weather__forecast-temp">{{ day.max }}°/{{ day.min }}°</span>
                 </li>
             </ul>
-
         </div>
     </section>
 </template>
@@ -110,15 +82,17 @@
 }
 
 .weather {
-    position: relative;
-    overflow: hidden;
-    display: flex;
+    background-color: var(--color-surface);
     border: 1px solid var(--color-secondary);
     border-radius: 12px;
     box-shadow: var(--shadow-card);
-    background: linear-gradient(to bottom,
-            var(--color-primary-container),
-            var(--color-surface));
+    overflow: hidden;
+}
+
+.weather__hero {
+    position: relative;
+    height: 160px;
+    background: linear-gradient(to bottom, var(--color-primary-container), var(--color-surface));
 }
 
 .weather__icon {
@@ -127,96 +101,87 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;
 }
 
-.weather__content {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    padding: 16px;
+.weather__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--color-surface) 5%, transparent 60%);
 }
 
-.weather__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-}
-
-.weather__header h2 {
-    margin: 0;
-    font-family: var(--font-heading);
-    font-size: 14px;
-    font-weight: var(--fw-semibold);
-    color: var(--color-text-muted);
-}
-
-.weather__selector {
-    select {
-        padding: 4px 8px;
-        border: 1px solid var(--color-secondary);
-        border-radius: 6px;
-        background: var(--color-surface);
-        font-family: var(--font-body);
-        font-size: 13px;
-    }
-}
-
-.weather__current {
+.weather__location {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
-}
+    z-index: 1;
 
-.weather__temperature {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 48px;
-    font-weight: var(--fw-bold);
-    line-height: 1;
-    color: var(--color-primary);
+    select {
+        max-width: 60%;
+        padding: 4px 10px;
+        border-radius: var(--radius-full);
+        border: 1px solid var(--color-secondary);
+        background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: var(--fw-semibold);
+    }
 }
 
 .weather__sky-icon {
-    font-size: 64px;
+    font-size: 28px;
     color: var(--color-primary);
+}
 
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 300,
-        'GRAD' 0,
-        'opsz' 48;
+.weather__temperature {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    z-index: 1;
+    font-family: var(--font-body);
+    font-size: 44px;
+    font-weight: var(--fw-bold);
+    color: var(--color-primary);
+    line-height: 1;
+    margin: 0;
+
+    span {
+        font-size: 24px;
+    }
+}
+
+.weather__content {
+    padding: 16px;
 }
 
 .weather__sky {
-    margin: 0 0 10px;
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 13px;
     color: var(--color-text-muted);
+    margin: 0 0 12px;
 }
 
 .weather__stats {
     display: grid;
     grid-template-columns: repeat(2, auto);
     column-gap: 24px;
-
-    padding: 10px 0;
-    margin-bottom: 10px;
-
-    border-top: 1px solid var(--color-secondary);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-secondary);
+    margin-bottom: 12px;
 
     dt {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--color-text-muted);
         text-transform: uppercase;
-        letter-spacing: .03em;
+        letter-spacing: 0.03em;
     }
 
     dd {
         margin: 0;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: var(--fw-semibold);
         color: var(--color-text);
     }
@@ -245,47 +210,32 @@
 .weather__forecast {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-
+    gap: 4px;
     list-style: none;
-
     margin: 0;
-    padding: 10px 0 0;
+    padding: 0;
 
-    border-top: 1px solid var(--color-secondary);
-}
-
-.weather__forecast li {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 6px;
+    li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+        padding: 8px 2px;
+        border-radius: 6px;
+        background-color: color-mix(in srgb, var(--color-surface-warm) 60%, transparent);
+    }
 }
 
 .weather__forecast-day {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: var(--fw-semibold);
     color: var(--color-text-muted);
 }
 
-.weather__forecast-icon {
-    font-size: 30px;
-    color: var(--color-primary);
-
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 300,
-        'GRAD' 0,
-        'opsz' 24;
-}
-
 .weather__forecast-temp {
-    font-size: 16px;
-    font-weight: var(--fw-bold);
+    font-size: 11px;
+    font-weight: var(--fw-semibold);
     color: var(--color-text);
     white-space: nowrap;
 }

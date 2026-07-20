@@ -97,9 +97,10 @@ footer {
 
   main {
     display: grid;
-    grid-template-columns: 471px 665px;
+    grid-template-columns: 665px 471px;
     grid-template-areas: 'calculator weather';
     justify-content: center;
+    align-items: start;
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
