@@ -1,4 +1,15 @@
 <script setup>
+import { useWeather } from '@/composables/useWeather.js'
+
+const {
+    location, skyDescription, temperature, humidity, wind, forecast,
+    isLoading, errorMessage, nationalCities, provinces, municipalities,
+    changeLocation, changeProvinceForMunicipalities,
+} = useWeather()
+
+function handleLocationChange() {
+    changeLocation(location.value)
+}
 </script>
 
 <template>
@@ -9,61 +20,48 @@
 
             <div class="weather__location">
                 <label for="location-select" class="sr-only">Ubicación</label>
-                <select id="location-select" name="location">
-                    <option value="" selected disabled>Ubicación</option>
+                <select id="location-select" name="location" v-model="location" @change="handleLocationChange">
                     <optgroup label="Nacional">
-                        <option value="nacional:33044">Oviedo</option>
+                        <option v-for="city in nationalCities" :key="city.codMunicipio"
+                            :value="`nacional:${city.codProv}:${city.codMunicipio}`">
+                            {{ city.name }}
+                        </option>
                     </optgroup>
                     <optgroup label="Provincia">
-                        <option value="provincia:33">Asturias</option>
+                        <option v-for="province in provinces" :key="province.codProv"
+                            :value="`provincia:${province.codProv}:33044`">
+                            {{ province.name }}
+                        </option>
                     </optgroup>
                     <optgroup label="Municipio">
-                        <option value="municipio:33024">Gijón</option>
+                        <option v-for="municipio in municipalities" :key="municipio.codMunicipio"
+                            :value="`municipio:${municipio.codProv}:${municipio.codMunicipio}`">
+                            {{ municipio.name }}
+                        </option>
                     </optgroup>
                 </select>
                 <span class="material-symbols-outlined weather__sky-icon" aria-hidden="true">cloud</span>
             </div>
 
-            <p class="weather__temperature">27<span>°</span></p>
+            <p class="weather__temperature" v-if="!isLoading">{{ temperature }}<span>°</span></p>
+            <p class="weather__temperature" v-else>...</p>
         </div>
 
         <div class="weather__content">
             <h2 id="weather-heading" class="sr-only">El tiempo</h2>
-            <p class="weather__sky">Nuboso</p>
+            <p class="weather__sky">{{ errorMessage || skyDescription }}</p>
 
             <dl class="weather__stats">
                 <dt>Humedad</dt>
-                <dd>49%</dd>
+                <dd>{{ humidity }}%</dd>
                 <dt>Viento</dt>
-                <dd>21 km/h</dd>
+                <dd>{{ wind }} km/h</dd>
             </dl>
 
             <ul class="weather__forecast">
-                <li>
-                    <span class="weather__forecast-day">Lun</span>
-                    <span class="material-symbols-outlined weather__forecast-icon" aria-hidden="true">wb_sunny</span>
-                    <span class="weather__forecast-temp">29°/16°</span>
-                </li>
-                <li>
-                    <span class="weather__forecast-day">Mar</span>
-                    <span class="material-symbols-outlined weather__forecast-icon"
-                        aria-hidden="true">partly_cloudy_day</span>
-                    <span class="weather__forecast-temp">28°/14°</span>
-                </li>
-                <li>
-                    <span class="weather__forecast-day">Mié</span>
-                    <span class="material-symbols-outlined weather__forecast-icon" aria-hidden="true">rainy</span>
-                    <span class="weather__forecast-temp">30°/14°</span>
-                </li>
-                <li>
-                    <span class="weather__forecast-day">Jue</span>
-                    <span class="material-symbols-outlined weather__forecast-icon" aria-hidden="true">cloud</span>
-                    <span class="weather__forecast-temp">30°/14°</span>
-                </li>
-                <li>
-                    <span class="weather__forecast-day">Vie</span>
-                    <span class="material-symbols-outlined weather__forecast-icon" aria-hidden="true">wb_sunny</span>
-                    <span class="weather__forecast-temp">27°/16°</span>
+                <li v-for="day in forecast" :key="day.date">
+                    <span class="weather__forecast-day">{{ day.date }}</span>
+                    <span class="weather__forecast-temp">{{ day.max }}°/{{ day.min }}°</span>
                 </li>
             </ul>
         </div>
@@ -122,6 +120,7 @@
     z-index: 1;
 
     select {
+        max-width: 60%;
         padding: 4px 10px;
         border-radius: var(--radius-full);
         border: 1px solid var(--color-secondary);
@@ -232,11 +231,6 @@
     font-size: 10px;
     font-weight: var(--fw-semibold);
     color: var(--color-text-muted);
-}
-
-.weather__forecast-icon {
-    font-size: 18px;
-    color: var(--color-primary);
 }
 
 .weather__forecast-temp {

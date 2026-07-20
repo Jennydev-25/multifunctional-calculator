@@ -10,7 +10,7 @@ export const locationsMapper = {
     })) ?? [],
     municipalities: (data) => data.municipios?.map((municipio) => ({
         codProv: municipio.CODPROV,
-        codMunicipio: municipio.COD_GEO,
+        codMunicipio: municipio.CODIGOINE?.substring(0, 5),
         name: municipio.NOMBRE,
     })) ?? [],
 }
