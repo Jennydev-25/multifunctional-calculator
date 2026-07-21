@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import { convertAmount } from '../utils/convertAmount.js';
-import CurrencyRepository from '@/core/apis/currency/CurrencyRepository';
-import CurrencyService from '@/core/apis/currency/CurrencyService';
+import CurrencyRepository from '@/core/repositories/CurrencyRepository';
+import CurrencyService from '@/core/services/CurrencyService';
 
 export function useCurrencyConverter() {
     const amount = ref('');

@@ -1,7 +1,7 @@
 import { describe, test, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import WeatherService from '../core/apis/weather/WeatherService.js';
-import LocationsService from '../core/apis/weather/LocationsService.js';
+import WeatherService from '../core/services/WeatherService.js';
+import LocationsService from '../core/services/LocationsService.js';
 import Weather from '../components/Weather.vue';
 
 describe('Weather', () => {

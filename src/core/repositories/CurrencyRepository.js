@@ -1,4 +1,4 @@
-import Repository from "@/core/models/Repository";
+import Repository from "@/core/repositories/Repository";
 
 export default class CurrencyRepository extends Repository {
 

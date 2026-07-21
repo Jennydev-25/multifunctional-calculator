@@ -1,6 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import CurrencyService from '../core/apis/currency/CurrencyService.js';
+import CurrencyService from '../core/services/CurrencyService.js';
 import CurrencyConverter from '../components/CurrencyConverter.vue';
 
 describe('CurrencyConverter', () => {
