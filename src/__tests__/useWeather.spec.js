@@ -1,6 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
-import WeatherService from '../core/apis/weather/WeatherService.js';
-import LocationsService from '../core/apis/weather/LocationsService.js';
+import WeatherService from '../core/services/WeatherService.js';
+import LocationsService from '../core/services/LocationsService.js';
 import { useWeather } from '../composables/useWeather.js';
 
 describe('useWeather', () => {

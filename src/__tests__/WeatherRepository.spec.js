@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import WeatherRepository from '../core/apis/weather/WeatherRepository.js';
+import WeatherRepository from '../core/repositories/WeatherRepository.js';
 
 describe('WeatherRepository', () => {
     test('deberia construir la URL correcta con provincia y municipio', () => {

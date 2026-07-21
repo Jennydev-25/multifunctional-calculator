@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from 'vitest';
-import WeatherService from '../core/apis/weather/WeatherService.js';
+import WeatherService from '../core/services/WeatherService.js';
 
 describe('WeatherService', () => {
     test('deberia devolver un WeatherModel con los datos mapeados', async () => {

@@ -757,23 +757,22 @@ multifunctional-calculator/
     │   ├── useCurrencyConverter.js
     │   └── useWeather.js
     ├── core/
-    │   ├── models/
+    │   ├── repositories/
     │   │   ├── Repository.js
-    │   │   ├── CurrencyModel.js
-    │   │   └── WeatherModel.js
-    │   ├── apis/
-    │   │   ├── currency/
-    │   │   │   ├── CurrencyRepository.js
-    │   │   │   └── CurrencyService.js
-    │   │   └── weather/
-    │   │       ├── WeatherRepository.js
-    │   │       ├── WeatherService.js
-    │   │       ├── LocationsRepository.js
-    │   │       └── LocationsService.js
-    │   └── mappers/
-    │       ├── currency-mapper.js
-    │       ├── weather-mapper.js
-    │       └── locations-mapper.js
+    │   │   ├── CurrencyRepository.js
+    │   │   ├── WeatherRepository.js
+    │   │   └── LocationsRepository.js
+    │   ├── services/
+    │   │   ├── CurrencyService.js
+    │   │   ├── WeatherService.js
+    │   │   └── LocationsService.js
+    │   ├── mappers/
+    │   │   ├── currency-mapper.js
+    │   │   ├── weather-mapper.js
+    │   │   └── locations-mapper.js
+    │   └── models/
+    │       ├── CurrencyModel.js
+    │       └── WeatherModel.js
     ├── stores/
     │   └── memoryCalculator.js
     ├── utils/
