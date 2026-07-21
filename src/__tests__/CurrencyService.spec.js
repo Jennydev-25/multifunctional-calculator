@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from 'vitest';
-import CurrencyService from '../core/apis/currency/CurrencyService.js';
+import CurrencyService from '../core/services/CurrencyService.js';
 
 describe('CurrencyService', () => {
     test('deberia devolver un CurrencyModel con la tasa pedida', async () => {

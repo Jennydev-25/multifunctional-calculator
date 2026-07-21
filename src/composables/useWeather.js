@@ -1,8 +1,8 @@
 import { ref, onMounted } from 'vue';
-import WeatherRepository from '@/core/apis/weather/WeatherRepository';
-import WeatherService from '@/core/apis/weather/WeatherService';
-import LocationsRepository from '@/core/apis/weather/LocationsRepository';
-import LocationsService from '@/core/apis/weather/LocationsService';
+import WeatherRepository from '@/core/repositories/WeatherRepository';
+import WeatherService from '@/core/services/WeatherService';
+import LocationsRepository from '@/core/repositories/LocationsRepository';
+import LocationsService from '@/core/services/LocationsService';
 
 export function useWeather() {
     const location = ref('municipio:33:33024');

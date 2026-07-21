@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import LocationsRepository from '../core/apis/weather/LocationsRepository.js';
+import LocationsRepository from '../core/repositories/LocationsRepository.js';
 
 describe('LocationsRepository', () => {
     test('deberia construir la URL de ciudades nacionales', () => {

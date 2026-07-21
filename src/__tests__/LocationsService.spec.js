@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from 'vitest';
-import LocationsService from '../core/apis/weather/LocationsService.js';
+import LocationsService from '../core/services/LocationsService.js';
 
 describe('LocationsService', () => {
     test('deberia devolver las ciudades nacionales mapeadas', async () => {

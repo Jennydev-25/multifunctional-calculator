@@ -1,6 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
 import axios from 'axios';
-import Repository from '../core/models/Repository.js';
+import Repository from '../core/repositories/Repository.js';
 
 vi.mock('axios');
 
